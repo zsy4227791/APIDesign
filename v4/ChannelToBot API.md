@@ -16,12 +16,12 @@
 # ChatbotSession
   - `POST /bot/ChatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
    - `Delete /bot/ChatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session)
+  - `POST /bot/ChatbotSessions/{id}:sendQuestion` - [Send a  Chatbot Question and get a Chatbot Answer](#create-a-chatbot-question)
 # ChatbotQuestion
   - `POST /bot/ChatbotQuestions` - [Create a new Chatbot Question and get a Chatbot Answer](#create-a-chatbot-question)
 # ChatbotAnswer
-  - `POST /bot/ChatbotAnswers/{ChatbotAnswerId}/score` - [Create a new Chatbot Question's score](#create-a-chatbot-answer-score)
   - `PUT /bot/ChatbotAnswers/{ChatbotAnswerId}/score` - [Update the  Chatbot Question's score](#update-the-chatbot-answer-score)
-
+  - `POST /bot/ChatbotAnswers/{ChatbotAnswerId}:rate` - [Update the  Chatbot Question's score](#update-the-chatbot-answer-score)
 
 # Model
 
