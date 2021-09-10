@@ -12,7 +12,7 @@
       - [ChatbotDialog](#chatbotdialog-object)
         - [ChatbotQuestion](#chatbotquestion-object) 
         - [ChatbotAnswer](#chatbotanswer-object) 
-          - [ChatbotResponse](#chatbotresponse-object) : text ,htmlText ,button,quickReply ,image ,video,form
+          - [ChatbotResponse](#chatbotresponse-object) 
 
 
 ## ChatbotSession
@@ -226,68 +226,146 @@ Response
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`type` | string | | enums: `text` ,`htmlText` ,`button`,`quickReply` ,`image` ,`video`,`form` |
-  | `content` | object | | response's content. when type is `text` or `htmlText`, it represents [Text Response](#text-response-object); when type is `image` ,it represents [ImageResponse](#imageresponse-object);when type is `video`, it represents [VideoResponse](#videoresponse-object), it represents string; when type is `button`,it represents [ButtonResponse](#buttonresponse-object);when type is `quickReply`, it represents [QuickReplyResponse](#quickreplyresponse-object); when type is `form`, it represents [FormReplyResponse](#formreplyresponse-object); |
+  |`type` | string | | type of the response,including `chatbotActionSendMessage`,`chatbotActionQuickReply`、 `chatbotActionSendImage`、`chatbotSendVideo`、`chatbotActionSSOLoginButton`,`chatbotActionCollectLocation`, `chatbotCollectCompany`, `chatbotCollectEmail`, `chatbotCollectName`, `chatbotActionCollectPhoneNumber`, `chatbotActionCollectComment`,`chatbotActionCollectVariableData`,`sendAForm`,`chatbotActionTransferChat`,`chatbotActionGotoTaskbot` |
+  | `content` | object | |  response's content. when type is `chatbotActionSendMessage`, it represents [SendMessage](#sendmessage-object); when type is `chatbotActionQuickReply`,it represents [QuickReply](#quickreply-object);when type is `chatbotActionSendImage`,it represents [SendImage](#sendimage-object);when type is `chatbotActionSendVideo`,it represents [SendVideo](#sendvideo-object); when type is `chatbotActionSSOLoginButton`, it represents [SSOLoginButton](#ssologinbutton-object);when type is `chatbotActionCollectLocation`, it represents [CollectLocation](#collectlocation-object);when type is `chatbotActionCollectCompany`, it represents [CollectCompany](#collectcompany-object);when type is `chatbotActionCollectEmail`, it represents [CollectEmail](#collectemail-object);when type is `chatbotActionCollectName`, it represents [CollectName](#collectname-object);when type is `chatbotActionCollectPhoneNumber`, it represents [CollectPhoneNumber](#collectphonenumber-object);when type is `chatbotActionCollectComment`, it represents [CollectComment](#collectcomment-object);when type is `chatbotActionCollectVariableData`, it represents [CollectVariableData](#collectvariabledata-object);when type is `sendAForm`, it represents [SendAForm](#sendform-object);when type is `chatbotActionTransferChat`, it represents [TransferChat](#transferchat-object);when type is `chatbotActionGotoTaskbot`,  it represents [GotoTaskbot](#gototaskbot-object); |
   |`disableChatInputArea` | bool | false | Only available when channel is  `Live Chat`. |
   |`delayTime` | decimal | 1 | how many seconds delay to show  |
 
-#### Text Response Object
+#### SendMessage Object
   Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`text` | string |  | string  |
+  |`message` | string |  | string  |
+  |`chatbotActionSendMessageLinks` | [button](#button-object) object |  |   |
+   |`nextActionId` | string |  | string  |\
+ #### QuickReply Object
+Text Response is represented as simple flat json objects with the following keys:
 
-### ImageResponse Object
-  Image is represented as simple flat JSON objects with the following keys:  
-
-  | Name | Type |  Default | Description |    
+  |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  | `name` | string  |  | name of the image |
-  | `url` | string  | | url of the image | 
-### VideoResponse Object
-  Video is represented as simple flat JSON objects with the following keys:  
+  |`isInputAreaEnabled` | bool |  |   |
+  |`message` | string |  | string  |
+  |`options` | [option](#option-object) |  |   |
+  |`otherResponseToActionId` | Guid |  |   |
+   #### Option Object
+Text Response is represented as simple flat json objects with the following keys:
 
-  | Name | Type |  Default | Description |    
+  |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  | `name` | string  |  | name of the video |
-  | `url` | string  | | url of the video |
+  |`optionId` | Guid |  |   |
+  |`nextActionId` | Guid |  |   |
+  |`order` | int |  |   |
+  |`text` | String |  |   |
+  |`type` | String | text |   |
+#### SendImage Object
+  Text Response is represented as simple flat json objects with the following keys:
 
-#### ButtonResponse Object
-ButtonResponse is represented as simple flat json objects with the following keys:
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`imageUrl` | string |  | string  |
+  |`message` | string |  | string  |
+  |`nextActionId` | string |  | string  |
+  #### SendVideo Object
+  Text Response is represented as simple flat json objects with the following keys:
 
-|Name| Type|  Default | Description   |   
-| - | - | :-: | - | 
-|`message` | string |  |text above buttons,this text will be sent before buttons.  | 
-|`buttons` | [Button](#button-Object)[] | |an array of [Button](#button-Object).  | 
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`videoUrl` | string |  | string  |
+  |`message` | string |  | string  |
+  |`nextActionId` | string |  | string  |
+  #### SSOLoginButton Object
+Text Response is represented as simple flat json objects with the following keys:
 
-#### Button Object
-Button is represented as simple flat json objects with the following keys:
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`failedActionId` | Guid |  |   |
+  |`isInputAreaEnabled` | bool |  |   |
+  |`loginButtonText` | string |  | string  |
+  |`loginInActionId` | Guid |  |   |
+  |`message` | string |  | string  |
+ #### CollectLocation Object
+Text Response is represented as simple flat json objects with the following keys:
 
-|Name| Type| Default | Description     | 
-| - | - | :-: | - | 
-|`buttonText` | string |  |text on button.  | 
-|`type` | string |  |enums contain `option`,`link` and `webView`,type of buttons  | 
-|`linkUrl` | string |  |url of the web page you want to open.  | 
-|`openIn` | string |  |enums contain `sideWindow`,`newWindow`,`currentWindow`, it represents the way that a page will be opened.  | 
-|`openStyle` | string | |enums contain `compact`,`tall` and `full`,it represents the size of the webview that will be opened.  |
-|`optionId` | string |  |id of item .  |
-#### QuickReplyResponse Object
-QuickReplyResponse is represented as simple flat json objects with the following keys:
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`buttonText` | string |  | string  |
+  |`failedActionId` | Guid |  |   |
+  |`isInputAreaEnabled` | bool |  |   |
+  |`successedActionId` | Guid |  |   |
+  |`message` | string |  | string  |
+#### CollectComment Object
+Text Response is represented as simple flat json objects with the following keys:
 
-|Name| Type| Default | Description     | 
-| - | - | :-: | - | 
-|`message` | string | |text sent before quickreplys.  |  
-|`quickReplyItems` | [QuickReplyItem](#QuickReplyItem-object)[]  | |an array of [QuickReplyItem](#QuickReplyItem-Object).  | 
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`nextActionId` | Guid |  |   |
+  |`isInputAreaEnabled` | bool |  |   |
+  |`message` | string |  | string  |
+  #### CollectName Object
+Text Response is represented as simple flat json objects with the following keys:
 
-#### QuickReplyItem Object
-|Name| Type   |Default | Description     | 
-| - | - | :-: | - | 
-|`type` | string |  |enum values, `option`,`contactAnAgent`  | 
-|`text` | string |  |text of quickreply item .  | 
-|`optionId` | string |  |id of quickreply item .  | 
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`nextActionId` | Guid |  |   |
+  |`isInputAreaEnabled` | bool |  |   |
+  |`message` | string |  | string  |
+  #### CollectEmail Object
+Text Response is represented as simple flat json objects with the following keys:
 
-### FormReplyResponse Object
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`nextActionId` | Guid |  |   |
+  |`isInputAreaEnabled` | bool |  |   |
+  |`message` | string |  | string  |
+  #### CollectCompany Object
+Text Response is represented as simple flat json objects with the following keys:
+
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`nextActionId` | Guid |  |   |
+  |`isInputAreaEnabled` | bool |  |   |
+  |`message` | string |  | string  |
+  #### CollectPhoneNumber Object
+Text Response is represented as simple flat json objects with the following keys:
+
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`nextActionId` | Guid |  |   |
+  |`isInputAreaEnabled` | bool |  |   |
+  |`message` | string |  | string  |
+  #### CollectVariableData Object
+Text Response is represented as simple flat json objects with the following keys:
+
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`nextActionId` | Guid |  |   |
+  |`isInputAreaEnabled` | bool |  |   |
+  |`message` | string |  | string  |
+  |`options` | array |  |   |
+  |`type` | string |  | type:integer,singleselect,multiselect,text,textarea，decimal，email，password，date，time |
+  |`variableName` | string |  | string  |
+  #### TransferChat Object
+Text Response is represented as simple flat json objects with the following keys:
+
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`transferTo` | Guid |  |   |
+  |`isInputAreaEnabled` | bool |  |   |
+  |`whenAgentOfflineToActionId` | Guid |  |   |
+  |`type` | string |  | type:transferToAgent,transferToDepartment  |
+  #### GotoTaskbot Object
+Text Response is represented as simple flat json objects with the following keys:
+
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`buttonText` | string |  | string  |
+  |`failedActionId` | Guid |  |   |
+  |`successedActionId` | Guid |  |   |
+  |`isInputAreaEnabled` | bool |  |   |
+  |`message` | string |  | string  |
+
+### SendForm Object
 FormReplyResponse is represented as simple flat json objects with the following keys:
 
 |Name| Type| Default | Description     | 
