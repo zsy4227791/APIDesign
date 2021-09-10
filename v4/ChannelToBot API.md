@@ -8,10 +8,11 @@
 
 # Summary
   - Chatbot
-    - [ChatbotSession](#chatbotsession)
-      - [ChatbotDialog](#chatbotdialog)
-        - ChatbotQuestion
-        - [ChatbotAnswer](#chatbotanswer) 
+    - [ChatbotSession](#chatbotsession-object)
+      - [ChatbotDialog](#chatbotdialog-object)
+        - [ChatbotQuestion](#chatbotquestion-object) 
+        - [ChatbotAnswer](#chatbotanswer-object) 
+          - [ChatbotResponse](#chatbotresponse-object) : text ,htmlText ,button,quickReply ,image ,video,form
 
 
 ## ChatbotSession
@@ -19,8 +20,7 @@
    - `DELETE /bot/chatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session)
 ## ChatbotDialog  
   - `POST /bot/chatbotSessions/{id}/dialogs` - [Send a  Chatbot Question and get a Chatbot Answer](#create-a-chatbot-dialog)
-## ChatbotAnswer
-  - `POST /bot/chatbotAnswers/{ChatbotAnswerId}:rate` - [Rate the Chatbot Question](#rate-the-chatbot-answer)
+
 
 # Endpoints
 
@@ -58,7 +58,7 @@ The Response body contains data with the follow structure:
   | Name | Type |  Description |    
   | - | - | :-: | 
   | `sessionId` | Guid | the unique id of the session |
-  |answer  |  [ChatbotAnswer](#chatbotanswer-object) Object    |  |
+  |greeting  |  [ChatbotAnswer](#chatbotanswer-object) Object    |  |
 
 
 #### Example
@@ -80,24 +80,20 @@ Response
 
   {    
     "sessionid": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
-    "answer":{
+    "greeting":{
       "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
-      "visitorQuestion":"",
-      "type":"greetingMessage",
       "content":{
         "responses":[
           {
             "type":"text",
             "content": {
               "text":"Hi, I'm Peely, I'm glad to help you.",
-              "audio":"UklGRrj2AQBXQVZFZm10IBAAAAABAAEAwF0AAIC7AAACABAAZGF0YZT2AQA..."
             }
           },
           {
             "type":"text",
             "content": {
               "text":"You can ask any questions. If you want to know what I can help with, you can say Menu or Options",
-              "audio":"UklGRrj2AQBXQVZFZm10IBAAAAABAAEAwF0AAIC7AAACABAAZGF0YZT2AQA..."
             }
           }
         ]
@@ -142,10 +138,7 @@ The request body  is: [ChatbotQuestion](#chatbotquestion-object) Object
 example:
 ```Json 
   {
-    "textInput":"i want to buy NBN",
-    "AudioInput":"String",		
-    "Location":	"String",		
-    "FormValues":	[]
+    "textInput":"i want to buy NBN"
   }
 ```
 
@@ -166,7 +159,6 @@ Response
 
   {    
     "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
-    "type":"highConfidenceAnswer",
     "content":{
       "responses":[
         {
@@ -187,84 +179,8 @@ Response
   }
 ```
 
-
-### Rate The Chatbot Answer
-
-  `POST /ChatbotAnswers/{ChatbotAnswerId}:rate`
-
-#### Parameters
-Path parameters
-
-  | Name  | Type | Required  | Description |     
-  | - | - | - | - | 
-  | `chatbotAnswerId` | Guid | yes  |  the id of the [ChatbotAnswer](#chatbotanswer-object) |
-
-Request body
-
-The request body contains data with the follow structure:
-
-  | Name | Type | Required  | Default | Description |    
-  | - | - | :-: | :-: |  - | 
-  | `rate` | string  | yes  | | `helpful` or `notHelpful` |
-
-  example:
-```Json 
-  {
-    "rate": "notHelpful",
-  }
-```
-#### Response
-the response is: [ChatbotAnswer](#chatbotanswer-object) Object
-
-#### Example
-- Rate the bot as not helpful
-
-  Using curl
-```
-curl -H "Content-Type: application/json" -d '{
-    "rate": "notHelpful",
-  }' -X POST https://domain.comm100.com/api/v4/bot/chatbotAnswers/f9928d68-92e6-4487-a2e8-8234fc9d1f48:rate
-```
-  Response
-```Json
-  HTTP/1.1 200 OK
-  Content-Type:  application/json
-  {    
-    "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
-    "type":"notHelpfulMessage",
-    "content":{
-      "messageWhenNotHelpful":"I am sorry that this doesn't answer your question. Please click on following button to connect to an agent.",
-      "ifIncludeContactAgentOptionWhenNotHelpful": true,
-    }
-  }  
-```
-
-- Rate the bot as helpful
-
-  Using curl
-```
-curl -H "Content-Type: application/json" -d '{
-    "score": "helpful",
-  }' -X POST https://domain.comm100.com/api/v4/bot/ChatbotAnswers/1487fc9d-92e6-4487-a2e8-92e68d6892e6:rate
-```
-  Response
-```Json
-HTTP/1.1 200 OK
-
-```
-
-
-
 # Model
 
-### ChatbotDialog Object
-
-  |Name| Type | Default | Description | 
-  | - | - | :-: | - | 
-  | `id` | Guid  | | DialogId |
-   | `ChatbotSessionId` | Guid  | | sessionId |
-  | `question` |  [ChatbotQuestion](#chatbotquestion-object) Object|  |  |
-  | `answer` |  [ChatbotAnswer](#chatbotanswer-object) Object |  |  |
 ### ChatbotSession Object
    
 
@@ -273,13 +189,18 @@ HTTP/1.1 200 OK
   | `id` | Guid  | | sessionId |
   | `dialogs` |  [ChatbotDialog](#chatbotdialog-object)[] Object |  |  |
   | `context` | [ChatbotSessionContext](#chatbotsessioncontext-object) Object  |   |  |
+### ChatbotDialog Object
 
+  |Name| Type | Default | Description | 
+  | - | - | :-: | - | 
+  | `id` | Guid  | | dialogId |
+  | `question` |  [ChatbotQuestion](#chatbotquestion-object) Object|  |  |
+  | `answer` |  [ChatbotAnswer](#chatbotanswer-object) Object |  |  |
 ### ChatbotQuestion Object
 
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `id` | Guid  | | questionId |
-  | `Sessionid` | Guid  | | sessionId |
   | `TextInput` | String  | |  |
   | `AudioInput` | String  | |  |
   | `Location` | String  | |  |
@@ -292,23 +213,7 @@ HTTP/1.1 200 OK
   |Name| Type| Default | Description     |
   | - | - | :-: | - |
   | `id` | Guid  |  | the unique id of the response |
-  | `sessionid` | Guid  |  | the unique id of the ChatbotSession |
-  | `dialogid` | Guid  |  | the unique id of the ChatbotSession | 
-  | `message` | List<MessageData>  |  | MessageData  |
-  | `score` | String  |  |   |
-  | `disableChatInputArea` | bool  | false | Only available when channel is  `Live Chat`. |
-### ChatbotSessionContext Object
-  ChatbotSessionContext Object is represented as simple flat JSON objects with the following keys:  
-
-  |Name| Type | Default | Description     | 
-  | - | - | :-: | - |   
-  | `chatbotId` | Guid  | | chatbotId |
-  | `authentication` | string  | | authentication data |
-  | `location` | string  | | the longitude and latitude of the location, e.g. "-39.900000,116.300000" |
-  | `consecutiveTimesOfPossibleAnswers` | int  | 0 |  |
-  | `invalidInputTimes` | int  | 0 |  |
-  | `visitor` | [Visitor](#visitor-object) Object  |   |  |
-  | `variable` | [FieldValue](#FieldValue-object)[] |  | an array of [FieldValue](#FieldValue-object) objects |
+  | `content` | [ChatbotResponse](#chatbot-response-object)[]|  |   |
 
 ### Visitor Object
 
@@ -333,87 +238,74 @@ HTTP/1.1 200 OK
 |`value` | string |  | the value of a field. |
 
 
+### ChatbotResponse Object
+  Response is represented as simple flat json objects with the following keys:
 
-
- MessageData Object is represented as simple flat JSON objects with the following keys: 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  | `type` | string  |  | type of the response:[GreetingMessage](#greetingmessage-object),[HighConfidenceAnswer](#highconfidenceanswer-object),[HighConfidenceAnswer](#highconfidenceanswer-object),[PossibleAnswer](#possibleanswer-object),[NoAnswer](#noanswer-object)|
-  | `content` | object |  | response's content. |
+  |`type` | string | | enums: `text` ,`htmlText` ,`button`,`quickReply` ,`image` ,`video`,`form` |
+  | `content` | object | | response's content. when type is `text` or `htmlText`, it represents [Text Response](#text-response-object); when type is `image` ,it represents [ImageResponse](#imageresponse-object);when type is `video`, it represents [VideoResponse](#videoresponse-object), it represents string; when type is `button`,it represents [ButtonResponse](#buttonresponse-object);when type is `quickReply`, it represents [QuickReplyResponse](#quickreplyresponse-object); when type is `form`, it represents [FormReplyResponse](#formreplyresponse-object); |
+  |`disableChatInputArea` | bool | false | Only available when channel is  `Live Chat`. |
+  |`delayTime` | decimal | 1 | how many seconds delay to show  |
 
+#### Text Response Object
+  Text Response is represented as simple flat json objects with the following keys:
 
-
-
-### GreetingMessage Object
-  GreetingMessage is represented as simple flat json objects with the following keys:
-
-  |Name| Type | Default | Description     | 
+  |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`responses`| [ChatbotResponse](#chatbot-response-object)[] | | an array of [ChatbotResponse](#chatbot-response-object) object. |
+  |`text` | string |  | string  |
 
-### HighConfidenceAnswer Object
-
-  HighConfidenceAnswer is represented as simple flat JSON objects with the following keys:  
-
-  | Name | Type | Default | Description |    
-  | - | - | - | - |  
-  | `responses`| [ChatbotResponse](#chatbot-response-object)[] |  | an array of [ChatbotResponse](#chatbot-response-object) object. |
-
-### PossibleAnswer Object
-
-  PossibleAnswer is represented as simple flat JSON objects with the following keys:  
-
-  | Name | Type | Default | Description |    
-  | - | - | - | - | 
-  | `message` | string | | Text of the Possible Answer message | 
-  | `audio` | string |  | base64 string, convert the message text to speech |  
-
-### NoAnswer Object
-
-  NoAnswer is represented as simple flat JSON objects with the following keys:  
+### ImageResponse Object
+  Image is represented as simple flat JSON objects with the following keys:  
 
   | Name | Type |  Default | Description |    
-  | - | - | - | - | 
-  |`message` | string |  | text of the No Answer message  |
-  |`audio` | string |  | base64 string, convert the message text to speech | 
-  | `ifIncludeContactAgentOption` | bool  |  |  |
-
-
-### AuthenticationRequest Object
-
-  AuthenticationRequest is represented as simple flat JSON objects with the following keys:  
-
-  | Name | Type  | Default | Description |    
   | - | - | :-: | - | 
-  | `signInMessage` | string  |  | message of the sign in |
-  | `audio` | string |  | base64 string, convert the signInMessage text to speech |   
-  | `signInButtonText` | string  |  | text of the sign in link |
-  | `signInURL` | string  |  | url of the sign in |
+  | `name` | string  |  | name of the image |
+  | `url` | string  | | url of the image | 
+### VideoResponse Object
+  Video is represented as simple flat JSON objects with the following keys:  
 
-
-### LocationRequest Object
-
-  LocationRequest is represented as simple flat JSON objects with the following keys:  
-
-  | Name | Type  | Default | Description |    
+  | Name | Type |  Default | Description |    
   | - | - | :-: | - | 
-  | `message` | string  |  | message of the sign in |
-  | `buttonText` | string  |  | text of the sign in link |
+  | `name` | string  |  | name of the video |
+  | `url` | string  | | url of the video |
 
+#### ButtonResponse Object
+ButtonResponse is represented as simple flat json objects with the following keys:
 
-### Prompt Object
+|Name| Type|  Default | Description   |   
+| - | - | :-: | - | 
+|`message` | string |  |text above buttons,this text will be sent before buttons.  | 
+|`buttons` | [Button](#button-Object)[] | |an array of [Button](#button-Object).  | 
 
-  Prompt is represented as simple flat JSON objects with the following keys:  
+#### Button Object
+Button is represented as simple flat json objects with the following keys:
 
-  | Name | Type | Default | Description |    
-  | - | - | :-: | - | 
-  |`question` | string | | |
-  | `audio` | string |  | base64 string, convert the signInMessage text to speech |   
-  |`options` | string[] |  | an array of string |
+|Name| Type| Default | Description     | 
+| - | - | :-: | - | 
+|`buttonText` | string |  |text on button.  | 
+|`type` | string |  |enums contain `triggerAnIntent`,`link` and `webView`,type of buttons  | 
+|`linkUrl` | string |  |url of the web page you want to open.  | 
+|`openIn` | string |  |enums contain `sideWindow`,`newWindow`,`currentWindow`, it represents the way that a page will be opened.  | 
+|`openStyle` | string | |enums contain `compact`,`tall` and `full`,it represents the size of the webview that will be opened.  |
 
+#### QuickReplyResponse Object
+QuickReplyResponse is represented as simple flat json objects with the following keys:
 
-### FormRequest Object
-FormRequest is represented as simple flat json objects with the following keys:
+|Name| Type| Default | Description     | 
+| - | - | :-: | - | 
+|`message` | string | |text sent before quickreplys.  |  
+|`quickReplyItems` | [QuickReplyItem](#QuickReplyItem-object)[]  | |an array of [QuickReplyItem](#QuickReplyItem-Object).  | 
+
+#### QuickReplyItem Object
+|Name| Type   |Default | Description     | 
+| - | - | :-: | - | 
+|`type` | string |  |enum values, `triggerAnIntent`,`contactAnAgent`  | 
+|`text` | string |  |text of quickreply item .  | 
+|`optionid` | string |  |id of quickreply item .  | 
+
+### FormReplyResponse Object
+FormReplyResponse is represented as simple flat json objects with the following keys:
 
 |Name| Type| Default | Description     | 
 | - | - | :-: | - | 
@@ -438,102 +330,5 @@ Field is represented as simple flat json objects with the following keys:
 |`isMasked` | bool |  | if this is true, visitor information will be masked with symbols in chat logs. |
 |`options` | string[] |  | an array of of string when the fieldType is `radio` ,`dropDownList` ,`checkBoxList`|
 |`order` | integer |  | must greater than or equal 0, ascending sort |
-
-### NotHelpfulMessage Object
-NotHelpfulMessage is represented as simple flat json objects with the following keys:
-
-|Name| Type| Default | Description     | 
-| - | - | :-: | - | 
-|`message` | string |  | text of the message  | 
-|`ifIncludeContactAgentOption` | bool |  | include Contact An Agent or not . |  
-
-
-### Chatbot Response Object
-  Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`type` | string | | enums: `text` ,`htmlText` ,`button`,`quickReply` ,`image` ,`video` ,`ivrMenu` ,`transferCall` . |
-  | `content` | object | | response's content. when type is `text` or `htmlText`, it represents [Text Response](#Text-Response-Object); when type is `image` ,it represents [ImageResponse](#ImageResponse-Object);when type is `video`, the content is the video url, it represents string; when type is `button`,it represents [ButtonResponse](#buttonresponse-object);when type is `quickReply`, it represents [QuickReplyResponse](#QuickReplyResponse); when type is `ivrMenu`, it represents [IVRMenu Response](#IVRMenu-Response-Object);when type is `transferCall`, it represents [TransferCall Response](#TransferCall-Response-Object); |
-  |`disableChatInputArea` | bool | false | Only available when channel is  `Live Chat`. |
-  |`delayTime` | decimal | 1 | how many seconds delay to show  |
-
-#### Text Response Object
-  Text Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`text` | string |  | string  |
-  |`audio` | string | | base64 string, convert the text to speech |
-
-### ImageResponse Object
-  Image is represented as simple flat JSON objects with the following keys:  
-
-  | Name | Type |  Default | Description |    
-  | - | - | :-: | - | 
-  | `name` | string  |  | name of the image |
-  | `url` | string  | | url of the image | 
-
-
-#### ButtonResponse Object
-ButtonResponse is represented as simple flat json objects with the following keys:
-
-|Name| Type|  Default | Description   |   
-| - | - | :-: | - | 
-|`message` | string |  |text above buttons,this text will be sent before buttons.  | 
-|`buttons` | [Button](#button-Object)[] | |an array of [Button](#button-Object).  | 
-
-#### Button Object
-Button is represented as simple flat json objects with the following keys:
-
-|Name| Type| Default | Description     | 
-| - | - | :-: | - | 
-|`buttonText` | string |  |text on button.  | 
-|`type` | string |  |enums contain `triggerAnIntent`,`link` and `webView`,type of buttons  | 
-|`linkUrl` | string |  |url of the web page you want to open.  | 
-|`openIn` | string |  |enums contain `sideWindow`,`newWindow`,`currentWindow`, it represents the way that a page will be opened.  | 
-|`openStyle` | string | |enums contain `compact`,`tall` and `full`,it represents the size of the webview that will be opened.  |
-
-#### QuickReplyResponse
-QuickReplyResponse is represented as simple flat json objects with the following keys:
-
-|Name| Type| Default | Description     | 
-| - | - | :-: | - | 
-|`message` | string | |text sent before quickreplys.  |  
-|`quickReplyItems` | [QuickReplyItem](#QuickReplyItem-object)[]  | |an array of [QuickReplyItem](#QuickReplyItem-Object).  | 
-
-#### QuickReplyItem Object
-|Name| Type   |Default | Description     | 
-| - | - | :-: | - | 
-|`type` | string |  |enum values, `triggerAnIntent`,`contactAnAgent`  | 
-|`text` | string |  |text of quickreply item .  | 
-
-
-#### IVRMenu Response Object
-  IVRMenu Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type|  Default | Description     | 
-  | - | - | :-: | - | 
-  |`message` | string |  | The message sent to visitor before the options.This message will be transferred to IVR and read to visitor  |
-  |`audio` | string |  | base64 string, convert the message text to speech  |  
-  |`invalidInputActionRepeatTime` | integer |  | How many times will this IVR Menu repeat if there is invalid input   | 
-  | `keys` | [IVRMenuKey](#IVRMenuKey-object)[]  |  | The valid keys for visitor to choose options. the key contains: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `0`, `*`, `#`. Each key can only be used once in an IVR menu. Visitor can press the key to choose the option.  |
-
-
-#### IVRMenuKey Object
-|Name| Type   |Default | Description     | 
-| - | - | :-: | - | 
-|`key` | string |  | The valid keys for visitor to choose options. the key contains: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `0`, `*`, `#`. Each key can only be used once in an IVR menu. Visitor can press the key to choose the option.  | 
-|`text` | string |  |text of quickreply item .  | 
-|`intentId` | Guid |  |    | 
-
-
-#### TransferCall Response Object
-  TransferCall Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`targetNumber` | string |  | phone number. |
-
 
 
