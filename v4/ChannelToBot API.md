@@ -188,7 +188,7 @@ Response
   | - | - | :-: | - | 
   | `id` | Guid  | | sessionId |
   | `dialogs` |  [ChatbotDialog](#chatbotdialog-object)[] Object |  |  |
-  | `context` | [ChatbotSessionContext](#chatbotsessioncontext-object) Object  |   |  |
+  | `context` | ChatbotSessionContext Object  |   |  |
 ### ChatbotDialog Object
 
   |Name| Type | Default | Description | 
@@ -205,6 +205,13 @@ Response
   | `location` | String  | | the longitude and latitude of the location, e.g. "-39.900000,116.300000" |
   | `optionId` | String  | |button or quickreply option  |
   | `formValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
+  ### FieldValue Object
+
+|Name| Type|  Default |  Description     |
+| - | - | :-: |  - | 
+|`name` | string |  | the name of a field in a form. |
+|`value` | string |  | the value of a field. |
+
 ### ChatbotAnswer Object
   ChatbotMessage Object is represented as simple flat JSON objects with the following keys:  
 
@@ -212,28 +219,6 @@ Response
   | - | - | :-: | - |
   | `id` | Guid  |  | the unique id of the response |
   | `content` | [ChatbotResponse](#chatbotresponse-object)[]|  |   |
-
-### Visitor Object
-
-|Name| Type|  Default |  Description     |
-| - | - | :-: |  - | 
-|`name` | string |  |  |
-|`email` | string |  |  |
-|`phone` | string |  |  |
-|`state/province` | string |  |  |
-|`country/region` | string |  |  |
-|`city` | string |  |  |
-|`ip` | string |  |  |
-|`email` | string |  |  |
-|`currentPageURL` | string |  |  |
-|`searchEngine` | string |  |  |
-|`searchKeywords` | string |  |  |
-### FieldValue Object
-
-|Name| Type|  Default |  Description     |
-| - | - | :-: |  - | 
-|`name` | string |  | the name of a field in a form. |
-|`value` | string |  | the value of a field. |
 
 
 ### ChatbotResponse Object
@@ -328,3 +313,21 @@ Field is represented as simple flat json objects with the following keys:
 |`isMasked` | bool |  | if this is true, visitor information will be masked with symbols in chat logs. |
 |`options` | string[] |  | an array of of string when the fieldType is `radio` ,`dropDownList` ,`checkBoxList`|
 |`order` | integer |  | must greater than or equal 0, ascending sort |
+
+### Visitor Object
+
+|Name| Type|  Default |  Description     |
+| - | - | :-: |  - | 
+|`name` | string |  |  |
+|`email` | string |  |  |
+|`phone` | string |  |  |
+|`state/province` | string |  |  |
+|`country/region` | string |  |  |
+|`city` | string |  |  |
+|`ip` | string |  |  |
+|`email` | string |  |  |
+|`currentPageURL` | string |  |  |
+|`searchEngine` | string |  |  |
+|`searchKeywords` | string |  |  |
+
+
