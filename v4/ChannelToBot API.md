@@ -9,33 +9,39 @@
 # Summary
   - Chatbot
     - [ChatbotSession](#chatbotsession)
+      - [ChatbotDialog](#chatbotdialog-object)
         - [ChatbotQuestion](#chatbotquestion) 
         - [ChatbotAnswer](#chatbotanswer) 
 
 
 # ChatbotSession
-  - `POST /bot/ChatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
-   - `Delete /bot/ChatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session)
-  - `POST /bot/ChatbotSessions/{id}:sendQuestion` - [Send a  Chatbot Question and get a Chatbot Answer](#create-a-chatbot-question)
-# ChatbotQuestion
-  - `POST /bot/ChatbotQuestions` - [Create a new Chatbot Question and get a Chatbot Answer](#create-a-chatbot-question)
+  - `POST /bot/chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
+   - `DELETE /bot/chatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session)
+  - `POST /bot/chatbotSessions/{id}/dialogs` - [Send a  Chatbot Question and get a Chatbot Answer](#create-a-chatbot-dialog)
 # ChatbotAnswer
-  - `PUT /bot/ChatbotAnswers/{ChatbotAnswerId}/score` - [Update the  Chatbot Question's score](#update-the-chatbot-answer-score)
-  - `POST /bot/ChatbotAnswers/{ChatbotAnswerId}:rate` - [Update the  Chatbot Question's score](#update-the-chatbot-answer-score)
+  - `POST /bot/chatbotAnswers/{ChatbotAnswerId}:rate` - [Update the  Chatbot Question's rate](#update-the-chatbot-answer-score)
 
 # Model
 
+### ChatbotDialog Object
+
+  |Name| Type | Default | Description | 
+  | - | - | :-: | - | 
+  | `id` | Guid  | | DialogId |
+   | `ChatbotSessionId` | Guid  | | sessionId |
+  | `question` |  [ChatbotQuestion](#chatbotquestion-object) Object|  |  |
+  | `answer` |  [ChatbotAnswer](#chatbotanswer-object) Object |  |  |
 ### ChatbotSession Object
-  ChatbotSession Object is represented as simple flat JSON objects with the following keys:  
+   
 
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `id` | Guid  | | sessionId |
-  | `questions` |  [ChatbotQuestion](#chatbotquestion-object)[] Object |  |  |
-  | `answers` |  [ChatbotAnswer](#chatbotanswer-object)[] Object |  |  |
+  | `dialogs` |  [ChatbotDialog](#chatbotdialog-object)[] Object |  |  |
   | `context` | [ChatbotSessionContext](#chatbotsessioncontext-object) Object  |   |  |
+
 ### ChatbotQuestion Object
-ChatbotQuestion Object is represented as simple flat JSON objects with the following keys:
+
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `id` | Guid  | | questionId |
@@ -43,6 +49,8 @@ ChatbotQuestion Object is represented as simple flat JSON objects with the follo
   | `TextInput` | String  | |  |
   | `AudioInput` | String  | |  |
   | `Location` | String  | |  |
+  | `Authentication` | string  | | authentication data |
+  | `OptionId` | String  | |  |
   | `FormValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
 ### ChatbotAnswer Object
   ChatbotMessage Object is represented as simple flat JSON objects with the following keys:  
@@ -50,9 +58,9 @@ ChatbotQuestion Object is represented as simple flat JSON objects with the follo
   |Name| Type| Default | Description     |
   | - | - | :-: | - |
   | `id` | Guid  |  | the unique id of the response |
-  | `sessionid` | Guid  |  | the unique id of the session |
-  | `questionid` | Guid  |  | the unique id of the question |
-  | `answer` | List<MessageData>  |  | MessageData  |
+  | `sessionid` | Guid  |  | the unique id of the ChatbotSession |
+  | `dialogid` | Guid  |  | the unique id of the ChatbotSession | 
+  | `message` | List<MessageData>  |  | MessageData  |
   | `score` | String  |  |   |
   | `disableChatInputArea` | bool  | false | Only available when channel is  `Live Chat`. |
 ### ChatbotSessionContext Object
@@ -63,20 +71,32 @@ ChatbotQuestion Object is represented as simple flat JSON objects with the follo
   | `chatbotId` | Guid  | | chatbotId |
   | `authentication` | string  | | authentication data |
   | `location` | string  | | the longitude and latitude of the location, e.g. "-39.900000,116.300000" |
-  | `formValues` | [FieldValue](#FieldValue-object)[] |  | an array of [FieldValue](#FieldValue-object) objects |
-  | `isFormSubmitted` | bool  | false |  |
   | `consecutiveTimesOfPossibleAnswers` | int  | 0 |  |
   | `invalidInputTimes` | int  | 0 |  |
-  | `customData` | Object  |   | Custom data |
+  | `visitor` | [Visitor](#visitor-object) Object  |   |  |
+  | `variable` | [FieldValue](#FieldValue-object)[] |  | an array of [FieldValue](#FieldValue-object) objects |
 
+### Visitor Object
+
+|Name| Type|  Default |  Description     |
+| - | - | :-: |  - | 
+|`name` | string |  |  |
+|`email` | string |  |  |
+|`phone` | string |  |  |
+|`state/province` | string |  |  |
+|`country/region` | string |  |  |
+|`city` | string |  |  |
+|`ip` | string |  |  |
+|`email` | string |  |  |
+|`currentPageURL` | string |  |  |
+|`searchEngine` | string |  |  |
+|`searchKeywords` | string |  |  |
 ### FieldValue Object
-FieldValue is represented as simple flat json objects with the following keys:
 
 |Name| Type|  Default |  Description     |
 | - | - | :-: |  - | 
 |`name` | string |  | the name of a field in a form. |
 |`value` | string |  | the value of a field. |
-
 
 
 
@@ -286,14 +306,10 @@ QuickReplyResponse is represented as simple flat json objects with the following
   # Endpoints
 
 ### Create A New Chatbot Session
-`POST /bot/ChatbotSessions`
+`POST /bot/chatbotSessions`
 
 #### Parameters
-Path parameters
 
-  | Name  | Type | Required  | Description |     
-  | - | - | - | - | 
-  | `chatbotId` | Guid | yes  |  the unique id of the bot |  
 
 Request body
 
@@ -302,15 +318,13 @@ The request body contains data with the follow structure:
   | Name | Type | Required | Default | Description |    
   | - | - | :-: | :-: | - | 
   | `chatbotId` | Guid | yes | |  the unique id of the bot |
-  | `id` | Guid | yes | |  id of the session, you must generate the unique sessionId  |
-  | `context` | [ChatbotSessionContext](#ChatbotSessionContext-Object) Object  | no  |  |
+  |visitor  |  [Visitor](#visitor-object) Object  |no |   |  |
 
 example:
 ```Json 
   {
-    "id": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
-    "context": {   
-      "customData": {
+    "chatbotId": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
+    "visitor": {
         "name":"Kart",
         "email":"kart@yahoo.com",
         "phone":"123-4355-212",
@@ -320,23 +334,25 @@ example:
 ```
 
 #### Response
-the response is: [ChatbotAnswer](#chatbotanswer-object) Object
+The Response body contains data with the follow structure:
+
+  | Name | Type |  Description |    
+  | - | - | :-: | 
+  | `sessionId` | Guid | the unique id of the session |
+  |answer  |  [ChatbotAnswer](#chatbotanswer-object) Object    |  |
 
 
 #### Example
 Using curl
 ```
 curl -H "Content-Type: application/json" -d '{
-    "channel":"IVR",
-    "id": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
-    "context": {   
-      "customData": {
-        "name":"Kart",
-        "email":"kart@yahoo.com",
-        "phone":"123-4355-212",
-      }
+    "chatbotId": "f9928d68-92e6-4487-a2e8-8234fc9d1f48", 
+    "visitor": {
+      "name":"Kart",
+      "email":"kart@yahoo.com",
+      "phone":"123-4355-212",
     }
-  }' -X POST https://domain.comm100.com/chatbots/a9928d68-92e6-4487-a2e8-8234fc9d1f48/sessions
+  }' -X POST https://domain.comm100.com/api/v4/bot/chatbotSessions
 ```
 Response
 ```Json
@@ -344,8 +360,8 @@ Response
   Content-Type:  application/json
 
   {    
-    "id": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
-    "message":{
+    "sessionid": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
+    "answer":{
       "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
       "visitorQuestion":"",
       "type":"greetingMessage",
@@ -371,79 +387,46 @@ Response
   }
 ```
 ### Delete The Chatbot Session
-`DELETE /bot/ChatbotSessions/{ChatbotSessionId}`
+`DELETE /bot/chatbotSessions/{ChatbotSessionId}`
 
 #### Parameters
 Path parameters
 
   | Name  | Type | Required  | Description |     
   | - | - | - | - | 
-  | `ChatbotSessionId` | Guid | yes  |  the unique id of the Chatbot Session |  
+  | `chatbotSessionId` | Guid | yes  |  the unique id of the Chatbot Session |  
 
-
-example:
-```Json 
-  {
-  }
-```
 
 #### Response
-the response is: [ChatbotAnswer](#chatbotanswer-object) Object
-
+This method does not specify any sample responses.
 
 #### Example
 Using curl
 ```
-curl -X DELETE https://domain.comm100.com/ChatbotSessions/a9928d68-92e6-4487-a2e8-8234fc9d1f48/sessions
+curl -X DELETE https://domain.comm100.com/api/v4/bot/chatbotSessions/a9928d68-92e6-4487-a2e8-8234fc9d1f48
 ```
 Response
 ```Json
   HTTP/1.1 200 OK
-  Content-Type:  application/json
 
-  {    
-      "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
-      "visitorQuestion":"",
-      "type":"byeMessage",
-      "content":{
-        "responses":[
-          {
-            "type":"text",
-            "content": {
-              "text":"goodbuy, I'm glad to help you.",
-              "audio":"UklGRrj2AQBXQVZFZm10IBAAAAABAAEAwF0AAIC7AAACABAAZGF0YZT2AQA..."
-            }
-          },
-          {
-            "type":"text",
-            "content": {
-              "text":"nice to meet you",
-              "audio":"UklGRrj2AQBXQVZFZm10IBAAAAABAAEAwF0AAIC7AAACABAAZGF0YZT2AQA..."
-            }
-          }
-        ]
-      }   
-  }
 ```
 
-### Create a Chatbot Question
-`POST /bot/ChatbotQuestions`
+### Create a Chatbot Dialog
+`POST /bot/chatbotSession/{chatbotSessionId}/dialogs`
 
 #### Parameters
 
-
 Request body
 
-The request body  is: [ChatbotQuestion](#chatbotquestion-object) Object:
+The request body  is: [ChatbotQuestion](#chatbotquestion-object) Object
 
 example:
 ```Json 
   {
-    "Sessionid":"",
     "textInput":"i want to buy NBN",
     "AudioInput":"String",		
     "Location":	"String",		
-  "FormValues":	[]
+    "FormValues":	[]
   }
 ```
 
@@ -454,17 +437,8 @@ the response is: [ChatbotAnswer](#chatbotanswer-object) Object
 Using curl
 ```
 curl -H "Content-Type: application/json" -d '{
-    "channel":"Facebook Messenger",
-    "textInput":"i want to buy NBN",
-    "context": {
-      "chatbotId": "a9928d68-92e6-4487-a2e8-8234fc9d1f48",
-      "customData": {
-        "name":"Kart",
-        "email":"kart@yahoo.com",
-        "phone":"123-4355-212",
-      }
-    },
-  }' -X POST https://domain.comm100.com/sessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48:detectIntent
+    "textInput":"i want to buy NBN"
+  }' -X POST https://domain.comm100.com/api/v4/bot/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/dialogs
 ```
 Response
 ```Json
@@ -473,7 +447,6 @@ Response
 
   {    
     "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
-    "visitorQuestion":"i want to buy NBN",
     "type":"highConfidenceAnswer",
     "content":{
       "responses":[
@@ -496,86 +469,9 @@ Response
 ```
 
 
-### Create a Chatbot Answer score
+### Rate a Chatbot Answer
 
-  `POST /ChatbotAnswers/{ChatbotAnswerId}/score`
-
-#### Parameters
-Path parameters
-
-  | Name  | Type | Required  | Description |     
-  | - | - | - | - | 
-  | `chatbotAnswerId` | Guid | yes  |  the id of the [ChatbotAnswer](#chatbotanswer-object) |
-
-Request body
-
-The request body contains data with the follow structure:
-
-  | Name | Type | Required  | Default | Description |    
-  | - | - | :-: | :-: |  - | 
-  | `score` | string  | yes  | | `helpful` or `notHelpful` |
-
-  example:
-```Json 
-  {
-    "chatbotAnswerId":"4487fc9d-92e6-4487-a2e8-92e68d6892e6",
-    "score": "notHelpful",
-  }
-```
-#### Response
-
-#### Example
-- Rate the bot as not helpful
-
-  Using curl
-```
-curl -H "Content-Type: application/json" -d '{
-    "score": "notHelpful",
-  }' -X POST https://domain.comm100.com/chatbotAnswers/f9928d68-92e6-4487-a2e8-8234fc9d1f48/score
-```
-  Response
-```Json
-  HTTP/1.1 200 OK
-  Content-Type:  application/json
-  {    
-    "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
-    "visitorQuestion":"",
-    "type":"notHelpfulMessage",
-    "content":{
-      "messageWhenNotHelpful":"I am sorry that this doesn't answer your question. Please click on following button to connect to an agent.",
-      "ifIncludeContactAgentOptionWhenNotHelpful": true,
-    }
-  }  
-```
-
-- Rate the bot as helpful
-
-  Using curl
-```
-curl -H "Content-Type: application/json" -d '{
-    "score": "helpful",
-  }' -X POST https://domain.comm100.com/ChatbotAnswers/1487fc9d-92e6-4487-a2e8-92e68d6892e6/score
-```
-  Response
-```Json
-HTTP/1.1 200 OK
-  Content-Type:  application/json
-  {    
-    "id": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
-    "context": {
-      "chatbotId": "a9928d68-92e6-4487-a2e8-8234fc9d1f48",
-      "customData": {
-        "name":"Kart",
-        "email":"kart@yahoo.com",
-        "phone":"123-4355-212",
-      }
-    }       
-  }
-```
-
-### Update the Chatbot Answer score
-
-  `PUT /ChatbotAnswers/{ChatbotAnswerId}/score`
+  `POST /ChatbotAnswers/{ChatbotAnswerId}:rate`
 
 #### Parameters
 Path parameters
@@ -590,16 +486,16 @@ The request body contains data with the follow structure:
 
   | Name | Type | Required  | Default | Description |    
   | - | - | :-: | :-: |  - | 
-  | `score` | string  | yes  | | `helpful` or `notHelpful` |
+  | `rate` | string  | yes  | | `helpful` or `notHelpful` |
 
   example:
 ```Json 
   {
-    "chatbotAnswerId":"4487fc9d-92e6-4487-a2e8-92e68d6892e6",
-    "score": "notHelpful",
+    "rate": "notHelpful",
   }
 ```
 #### Response
+the response is: [ChatbotAnswer](#chatbotanswer-object) Object
 
 #### Example
 - Rate the bot as not helpful
@@ -607,8 +503,8 @@ The request body contains data with the follow structure:
   Using curl
 ```
 curl -H "Content-Type: application/json" -d '{
-    "score": "notHelpful",
-  }' -X PUT https://domain.comm100.com/chatbotAnswers/f9928d68-92e6-4487-a2e8-8234fc9d1f48/score
+    "rate": "notHelpful",
+  }' -X POST https://domain.comm100.com/api/v4/bot/chatbotAnswers/f9928d68-92e6-4487-a2e8-8234fc9d1f48:rate
 ```
   Response
 ```Json
@@ -616,7 +512,6 @@ curl -H "Content-Type: application/json" -d '{
   Content-Type:  application/json
   {    
     "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
-    "visitorQuestion":"",
     "type":"notHelpfulMessage",
     "content":{
       "messageWhenNotHelpful":"I am sorry that this doesn't answer your question. Please click on following button to connect to an agent.",
@@ -631,22 +526,11 @@ curl -H "Content-Type: application/json" -d '{
 ```
 curl -H "Content-Type: application/json" -d '{
     "score": "helpful",
-  }' -X PUT https://domain.comm100.com/ChatbotAnswers/1487fc9d-92e6-4487-a2e8-92e68d6892e6/score
+  }' -X POST https://domain.comm100.com/api/v4/bot/ChatbotAnswers/1487fc9d-92e6-4487-a2e8-92e68d6892e6:rate
 ```
   Response
 ```Json
 HTTP/1.1 200 OK
-  Content-Type:  application/json
-  {    
-    "id": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
-    "context": {
-      "chatbotId": "a9928d68-92e6-4487-a2e8-8234fc9d1f48",
-      "customData": {
-        "name":"Kart",
-        "email":"kart@yahoo.com",
-        "phone":"123-4355-212",
-      }
-    }       
-  }
+
 ```
 
