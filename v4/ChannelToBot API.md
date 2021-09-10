@@ -20,7 +20,7 @@
 ## ChatbotDialog  
   - `POST /bot/chatbotSessions/{id}/dialogs` - [Send a  Chatbot Question and get a Chatbot Answer](#create-a-chatbot-dialog)
 ## ChatbotAnswer
-  - `POST /bot/chatbotAnswers/{ChatbotAnswerId}:rate` - [Update the  Chatbot Question's rate](#update-the-chatbot-answer-score)
+  - `POST /bot/chatbotAnswers/{ChatbotAnswerId}:rate` - [Rate the Chatbot Question](#rate-the-chatbot-answer)
 
 # Endpoints
 
@@ -188,7 +188,7 @@ Response
 ```
 
 
-### Rate a Chatbot Answer
+### Rate The Chatbot Answer
 
   `POST /ChatbotAnswers/{ChatbotAnswerId}:rate`
 
