@@ -9,14 +9,15 @@
 # Summary
   - Chatbot
     - [ChatbotSession](#chatbotsession)
-      - [ChatbotDialog](#chatbotdialog-object)
-        - [ChatbotQuestion](#chatbotquestion) 
+      - [ChatbotDialog](#chatbotdialog)
+        - ChatbotQuestion
         - [ChatbotAnswer](#chatbotanswer) 
 
 
 # ChatbotSession
   - `POST /bot/chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
    - `DELETE /bot/chatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session)
+# ChatbotDialog  
   - `POST /bot/chatbotSessions/{id}/dialogs` - [Send a  Chatbot Question and get a Chatbot Answer](#create-a-chatbot-dialog)
 # ChatbotAnswer
   - `POST /bot/chatbotAnswers/{ChatbotAnswerId}:rate` - [Update the  Chatbot Question's rate](#update-the-chatbot-answer-score)
