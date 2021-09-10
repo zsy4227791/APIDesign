@@ -37,7 +37,7 @@ The request body contains data with the follow structure:
   | Name | Type | Required | Default | Description |    
   | - | - | :-: | :-: | - | 
   | `chatbotId` | Guid | yes | |  the unique id of the bot |
-  |visitor  |  [Visitor](#visitor-object) Object  |no |   |  |
+  |`visitor`  |  [Visitor](#visitor-object) Object  |no |   |  |
 
 example:
 ```Json 
@@ -58,7 +58,7 @@ The Response body contains data with the follow structure:
   | Name | Type |  Description |    
   | - | - | :-: | 
   | `sessionId` | Guid | the unique id of the session |
-  |greeting  |  [ChatbotAnswer](#chatbotanswer-object) Object    |  |
+  |`greeting`  |  [ChatbotAnswer](#chatbotanswer-object) Object    |  |
 
 
 #### Example
@@ -201,19 +201,17 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `id` | Guid  | | questionId |
-  | `TextInput` | String  | |  |
-  | `AudioInput` | String  | |  |
-  | `Location` | String  | |  |
-  | `Authentication` | string  | | authentication data |
-  | `OptionId` | String  | |  |
-  | `FormValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
+  | `textInput` | String  | |  |
+  | `location` | String  | | the longitude and latitude of the location, e.g. "-39.900000,116.300000" |
+  | `optionId` | String  | |button or quickreply option  |
+  | `formValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
 ### ChatbotAnswer Object
   ChatbotMessage Object is represented as simple flat JSON objects with the following keys:  
 
   |Name| Type| Default | Description     |
   | - | - | :-: | - |
   | `id` | Guid  |  | the unique id of the response |
-  | `content` | [ChatbotResponse](#chatbot-response-object)[]|  |   |
+  | `content` | [ChatbotResponse](#chatbotresponse-object)[]|  |   |
 
 ### Visitor Object
 
@@ -284,11 +282,11 @@ Button is represented as simple flat json objects with the following keys:
 |Name| Type| Default | Description     | 
 | - | - | :-: | - | 
 |`buttonText` | string |  |text on button.  | 
-|`type` | string |  |enums contain `triggerAnIntent`,`link` and `webView`,type of buttons  | 
+|`type` | string |  |enums contain `option`,`link` and `webView`,type of buttons  | 
 |`linkUrl` | string |  |url of the web page you want to open.  | 
 |`openIn` | string |  |enums contain `sideWindow`,`newWindow`,`currentWindow`, it represents the way that a page will be opened.  | 
 |`openStyle` | string | |enums contain `compact`,`tall` and `full`,it represents the size of the webview that will be opened.  |
-
+|`optionId` | string |  |id of item .  |
 #### QuickReplyResponse Object
 QuickReplyResponse is represented as simple flat json objects with the following keys:
 
@@ -300,9 +298,9 @@ QuickReplyResponse is represented as simple flat json objects with the following
 #### QuickReplyItem Object
 |Name| Type   |Default | Description     | 
 | - | - | :-: | - | 
-|`type` | string |  |enum values, `triggerAnIntent`,`contactAnAgent`  | 
+|`type` | string |  |enum values, `option`,`contactAnAgent`  | 
 |`text` | string |  |text of quickreply item .  | 
-|`optionid` | string |  |id of quickreply item .  | 
+|`optionId` | string |  |id of quickreply item .  | 
 
 ### FormReplyResponse Object
 FormReplyResponse is represented as simple flat json objects with the following keys:
@@ -330,5 +328,3 @@ Field is represented as simple flat json objects with the following keys:
 |`isMasked` | bool |  | if this is true, visitor information will be masked with symbols in chat logs. |
 |`options` | string[] |  | an array of of string when the fieldType is `radio` ,`dropDownList` ,`checkBoxList`|
 |`order` | integer |  | must greater than or equal 0, ascending sort |
-
-
