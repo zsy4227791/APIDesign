@@ -81,7 +81,10 @@ Response
     "greeting":{
       "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
       "content":{
- 
+             "chatbotActionSendMessageLinks": [],
+            "message": "Hi there! I'm a chatbot, here to help answer your questions.",
+            "nextActionId": "00000000-0000-0000-0000-000000000000",
+            "typingDelay": 1
         ]
       }
     }    
