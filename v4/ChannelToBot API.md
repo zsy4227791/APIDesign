@@ -188,8 +188,8 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `id` | Guid  | | questionId |
-  | `type` | String  | | 	type of the response,including`text`,`audio`,`location`,`form`,`option` |
-  | `content` | object  | | [textInput](#textinput-object), [audioInput](#audioinput-object), [locationInput](#locationinput-object), [optionInput](#optioninput-object), [formInput](#forminput-object),  |
+  | `type` | String  | | 	type of the response,including`text`,`audio`,`location`,`option`,`form`,`variable` |
+  | `content` | object  | | [textInput](#textinput-object), [audioInput](#audioinput-object), [locationInput](#locationinput-object), [optionInput](#optioninput-object), [formInput](#forminput-object), [variableInput](#variableinput-object) |
 
   ### TextInput Object
   |Name| Type | Default | Description | 
@@ -214,6 +214,10 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - |
   | `formValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
+  ### variableInput Object
+  |Name| Type | Default | Description | 
+  | - | - | :-: | - |
+  | `variableValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
   ### FieldValue Object
 
 |Name| Type|  Default |  Description     |
