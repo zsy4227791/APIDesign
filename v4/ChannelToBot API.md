@@ -28,8 +28,6 @@
 `POST /bot/chatbotSessions`
 
 #### Parameters
-
-
 Request body
 
 The request body contains data with the follow structure:
@@ -83,19 +81,7 @@ Response
     "greeting":{
       "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
       "content":{
-        "responses":[
-          {
-            "type":"text",
-            "content": {
-              "text":"Hi, I'm Peely, I'm glad to help you.",
-            }
-          },
-          {
-            "type":"text",
-            "content": {
-              "text":"You can ask any questions. If you want to know what I can help with, you can say Menu or Options",
-            }
-          }
+ 
         ]
       }
     }    
@@ -162,16 +148,12 @@ Response
     "content":{
       "responses":[
         {
-          "type":"htmlText",
+          "type":"chatbotActionSendMessage",
           "content": {
-            "text":"<div>Hi, what can i do for you?</div>",
-          }
-        },
-        {
-          "type":"image",
-          "content": {
-            "name":"greeting.png",
-            "url": "https://bot.comm100.com/botapi/images/greeting.png"
+            "chatbotActionSendMessageLinks": [],
+            "message": "Hi there! I'm a chatbot, here to help answer your questions.",
+            "nextActionId": "00000000-0000-0000-0000-000000000000",
+            "typingDelay": 1
           }
         }
       ]
@@ -203,7 +185,8 @@ Response
   | `id` | Guid  | | questionId |
   | `textInput` | String  | |  |
   | `location` | String  | | the longitude and latitude of the location, e.g. "-39.900000,116.300000" |
-  | `optionId` | String  | |button or quickreply option  |
+  | `nextActionId` | String  | |nextActionId |
+  | `variables` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
   | `formValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
   ### FieldValue Object
 
@@ -238,7 +221,7 @@ Response
   | - | - | :-: | - | 
   |`message` | string |  | string  |
   |`chatbotActionSendMessageLinks` | [button](#button-object) object |  |   |
-   |`nextActionId` | string |  | string  |\
+  |`nextActionId` | string |  | string  |
  #### QuickReply Object
 Text Response is represented as simple flat json objects with the following keys:
 
