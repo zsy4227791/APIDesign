@@ -20,7 +20,8 @@
    - `DELETE /bot/chatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session)
 ## ChatbotInteraction  
   - `POST /bot/chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)
-
+## ChatbotSessionVariable
+  - `PUT /bot/chatbotSessions/{id}/variables` - [Update the variables of the Chatbot Session ](#update-the-variables)
 
 # Endpoints
 
@@ -165,6 +166,46 @@ Response
       ]  
   }
 ```
+### Update The Variables
+`PUT /bot/chatbotSession/{chatbotSessionId}/variables`
+
+#### Parameters
+Path parameters
+
+  | Name  | Type | Required  | Description |     
+  | - | - | - | - | 
+  | `chatbotSessionId` | Guid | yes  |  the unique id of the Chatbot Session |  
+
+Request body
+  | Name  | Type | Required  | Description |     
+  | - | - | - | - | 
+|`variables` |[VariableValue](#variablevalue-object)[]  | |  an array of [VariableValue](#variablevalue-object) objects  |
+example:
+```Json 
+  {
+    "variables":[
+      {
+        "name":"ename",
+        "value":"leon"
+      }
+    ]
+  }
+```
+
+#### Response
+
+
+#### Example
+Using curl
+```
+curl -H "Content-Type: application/json" -d '{
+    "value":"leon"
+  }' -X PUT https://domain.comm100.com/api/v4/bot/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/variables/name
+```
+Response
+```Json
+  HTTP/1.1 200 OK
+```
 
 # Model
 
@@ -188,8 +229,8 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `id` | Guid  | | questionId |
-  | `type` | String  | | 	type of the response,including`text`,`audio`,`location`,`option`,`form`,`transferchat`,`interactionfailed`|
-  | `content` | object  | | [textInput](#textinput-object), [audioInput](#audioinput-object), [locationInput](#locationinput-object), [optionInput](#optioninput-object), [formInput](#forminput-object) , [Interactionfailed](#interactionfailed-object)|
+  | `type` | String  | | 	type of the response,including`text`,`audio`,`location`,`option`,`form`,`transferchat`|
+  | `content` | object  | | [textInput](#textinput-object), [audioInput](#audioinput-object), [locationInput](#locationinput-object), [optionInput](#optioninput-object), [formInput](#forminput-object) , [Transferchat](#transferchat-object)|
 
   ### TextInput Object
   |Name| Type | Default | Description | 
@@ -206,6 +247,7 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `location` | String  | | the longitude and latitude of the location, e.g. "-39.900000,116.300000" |
+  | `isSuccess` | bool  | true|  |
 
   ### OptionInput Object
   |Name| Type | Default | Description | 
@@ -215,19 +257,24 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - |
   | `formValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
-
-
-  ### Interactionfailed Object
+  | `formId` | Guid  | |  |
+  | `isSuccess` | bool  |true|  |
+  ### Transferchat Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
-| `reason` | string  | |fail reason |
-  ### FieldValue Object
+  | `isSuccess` | bool  |true |  |
+  
+### FieldValue Object
 
 |Name| Type|  Default |  Description     |
 | - | - | :-: |  - | 
 |`name` | string |  | the name of a field in a form. |
 |`value` | string |  | the value of a field. |
-
+### VariableValue Object
+|Name| Type|  Default |  Description     |
+| - | - | :-: |  - | 
+|`name` | string |  | the name of a variable in a form. |
+|`value` | string |  | the value of a variable. |
 ### ChatbotOutput Object
   ChatbotMessage Object is represented as simple flat JSON objects with the following keys:  
 
