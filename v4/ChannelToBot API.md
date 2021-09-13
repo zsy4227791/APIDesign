@@ -188,8 +188,8 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `id` | Guid  | | questionId |
-  | `type` | String  | | 	type of the response,including`text`,`audio`,`location`,`option`,`form`,`variable` |
-  | `content` | object  | | [textInput](#textinput-object), [audioInput](#audioinput-object), [locationInput](#locationinput-object), [optionInput](#optioninput-object), [formInput](#forminput-object), [variableInput](#variableinput-object) |
+  | `type` | String  | | 	type of the response,including`text`,`audio`,`location`,`option`,`form`,`transferchat`,`interactionfailed`|
+  | `content` | object  | | [textInput](#textinput-object), [audioInput](#audioinput-object), [locationInput](#locationinput-object), [optionInput](#optioninput-object), [formInput](#forminput-object) , [Interactionfailed](#interactionfailed-object)|
 
   ### TextInput Object
   |Name| Type | Default | Description | 
@@ -206,6 +206,7 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `location` | String  | | the longitude and latitude of the location, e.g. "-39.900000,116.300000" |
+
   ### OptionInput Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
@@ -214,10 +215,12 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - |
   | `formValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
-  ### variableInput Object
+
+
+  ### Interactionfailed Object
   |Name| Type | Default | Description | 
-  | - | - | :-: | - |
-  | `variableValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
+  | - | - | :-: | - | 
+| `reason` | string  | |fail reason |
   ### FieldValue Object
 
 |Name| Type|  Default |  Description     |
@@ -239,8 +242,8 @@ Response
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`type` | string | | type of the response,including `chatbotActionSendMessage`,`chatbotActionQuickReply`、 `chatbotActionSendImage`、`chatbotSendVideo`、`chatbotActionSSOLoginButton`,`chatbotActionCollectLocation`, `chatbotCollectCompany`, `chatbotCollectEmail`, `chatbotCollectName`, `chatbotActionCollectPhoneNumber`, `chatbotActionCollectComment`,`chatbotActionCollectVariableData`,`sendAForm`,`chatbotActionTransferChat`,`chatbotActionGotoTaskbot` |
-  | `content` | object | |  response's content. when type is `chatbotActionSendMessage`, it represents [SendMessage](#sendmessage-object); when type is `chatbotActionQuickReply`,it represents [QuickReply](#quickreply-object);when type is `chatbotActionSendImage`,it represents [SendImage](#sendimage-object);when type is `chatbotActionSendVideo`,it represents [SendVideo](#sendvideo-object); when type is `chatbotActionSSOLoginButton`, it represents [SSOLoginButton](#ssologinbutton-object);when type is `chatbotActionCollectLocation`, it represents [CollectLocation](#collectlocation-object);when type is `chatbotActionCollectCompany`, it represents [CollectCompany](#collectcompany-object);when type is `chatbotActionCollectEmail`, it represents [CollectEmail](#collectemail-object);when type is `chatbotActionCollectName`, it represents [CollectName](#collectname-object);when type is `chatbotActionCollectPhoneNumber`, it represents [CollectPhoneNumber](#collectphonenumber-object);when type is `chatbotActionCollectComment`, it represents [CollectComment](#collectcomment-object);when type is `chatbotActionCollectVariableData`, it represents [CollectVariableData](#collectvariabledata-object);when type is `sendAForm`, it represents [SendAForm](#sendform-object);when type is `chatbotActionTransferChat`, it represents [TransferChat](#transferchat-object);when type is `chatbotActionGotoTaskbot`,  it represents [GotoTaskbot](#gototaskbot-object); |
+  |`type` | string | | type of the response,including `SendMessage`,`QuickReply`、 `SendImage`、`SendVideo`、`Authenrization`,`CollectLocation`, `CollectCompany`, `CollectEmail`, `CollectName`, `CollectPhoneNumber`, `CollectComment`,`CollectVariableData`,`SendForm`,`TransferChat`,`GotoTaskBot` |
+  | `content` | object | |  response's content. when type is `SendMessage`, it represents [SendMessage](#sendmessage-object); when type is `QuickReply`,it represents [QuickReply](#quickreply-object);when type is `SendImage`,it represents [SendImage](#sendimage-object);when type is `SendVideo`,it represents [SendVideo](#sendvideo-object); when type is `Authenrization`, it represents [Authenrization](#ssologinbutton-object);when type is `CollectLocation`, it represents [CollectLocation](#collectlocation-object);when type is `CollectCompany`, it represents [CollectCompany](#collectcompany-object);when type is `CollectEmail`, it represents [CollectEmail](#collectemail-object);when type is `CollectName`, it represents [CollectName](#collectname-object);when type is `CollectPhoneNumber`, it represents [CollectPhoneNumber](#collectphonenumber-object);when type is `CollectComment`, it represents [CollectComment](#collectcomment-object);when type is `CollectVariableData`, it represents [CollectVariableData](#collectvariabledata-object);when type is `SendForm`, it represents [SendForm](#sendform-object);when type is `TransferChat`, it represents [TransferChat](#transferchat-object);when type is `GotoTaskbot`,  it represents [GotoTaskbot](#gototaskbot-object); |
   |`disableChatInputArea` | bool | false | Only available when channel is  `Live Chat`. |
   |`delayTime` | decimal | 1 | how many seconds delay to show  |
 
@@ -283,16 +286,14 @@ Text Response is represented as simple flat json objects with the following keys
   | - | - | :-: | - | 
   |`videoUrl` | string |  | string  |
   |`message` | string |  | string  |
-  #### SSOLoginButton Object
+  #### Login Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`failedOptionId` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
   |`loginButtonText` | string |  | string  |
   |`loginUrl` | string |  | string  |
-  |`loginInOptionId` | Guid |  |   |
   |`message` | string |  | string  |
  #### CollectLocation Object
 Text Response is represented as simple flat json objects with the following keys:
@@ -300,9 +301,7 @@ Text Response is represented as simple flat json objects with the following keys
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`buttonText` | string |  | string  |
-  |`failedOptionId` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
-  |`successedOptionId` | Guid |  |   |
   |`message` | string |  | string  |
 #### CollectComment Object
 Text Response is represented as simple flat json objects with the following keys:
@@ -357,16 +356,6 @@ Text Response is represented as simple flat json objects with the following keys
   |`transferTo` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
   |`type` | string |  | type:transferToAgent,transferToDepartment  |
-  #### GotoTaskbot Object
-Text Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`buttonText` | string |  | string  |
-  |`failedOptionId` | Guid |  |   |
-  |`successedOptionId` | Guid |  |   |
-  |`isInputAreaEnabled` | bool |  |   |
-  |`message` | string |  | string  |
 
 ### SendForm Object
 FormReplyResponse is represented as simple flat json objects with the following keys:
