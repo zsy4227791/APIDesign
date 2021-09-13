@@ -1,6 +1,6 @@
   | Change Version | API Version | Change nots | Change Date | Author |
   | - | - | - | - | - |
-  | 4.0 | v4 | Bot API | 2021-9-13 | Leon |  
+  | 4.0 | v4 | Bot API | 2021-9-8 | Leon |  
  
 
 
@@ -190,17 +190,18 @@ Response
   | `id` | Guid  | | questionId |
   | `type` | String  | | 	type of the response,including`text`,`audio`,`location`,`form`,`option` |
   | `content` | object  | | [textInput](#textinput-object), [audioInput](#audioinput-object), [locationInput](#locationinput-object), [optionInput](#optioninput-object), [formInput](#forminput-object),  |
-  | `isNewQuestion` | bool  | | is a new Question or not |
 
   ### TextInput Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `text` | String  | |  |
+  | `isNewQuestion` | bool  | | is a new Question or not |
   ### AudioInput Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `text` | String  | |  |
   | `audio` | String  | |  |
+  | `isNewQuestion` | bool  | | is a new Question or not |
   ### LocationInput Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
