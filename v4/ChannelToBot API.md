@@ -1,6 +1,6 @@
   | Change Version | API Version | Change nots | Change Date | Author |
   | - | - | - | - | - |
-  | 4.0 | v4 | Bot API | 2021-9-8 | Leon |  
+  | 4.0 | v4 | Bot API | 2021-9-13 | Leon |  
  
 
 
@@ -9,17 +9,17 @@
 # Summary
   - Chatbot
     - [ChatbotSession](#chatbotsession-object)
-      - [ChatbotDialog](#chatbotdialog-object)
-        - [ChatbotQuestion](#chatbotquestion-object) 
-        - [ChatbotAnswer](#chatbotanswer-object) 
+      - [ChatbotInteraction](#chatbotinteraction-object)
+        - [ChatbotInput](#chatbotinput-object) 
+        - [ChatbotOutput](#chatbotoutput-object) 
           - [ChatbotResponse](#chatbotresponse-object) 
 
 
 ## ChatbotSession
   - `POST /bot/chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
    - `DELETE /bot/chatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session)
-## ChatbotDialog  
-  - `POST /bot/chatbotSessions/{id}/dialogs` - [Send a  Chatbot Question and get a Chatbot Answer](#create-a-chatbot-dialog)
+## ChatbotInteraction  
+  - `POST /bot/chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot ](#create-a-chatbot-interaction)
 
 
 # Endpoints
@@ -55,7 +55,7 @@ The Response body contains data with the follow structure:
 
   | Name | Type |  Description |    
   | - | - | :-: | 
-  | `sessionId` | Guid | the unique id of the session |
+  |`sessionId` | Guid | the unique id of the session |
   |`greeting`  |  [ChatbotAnswer](#chatbotanswer-object) Object    |  |
 
 
@@ -79,15 +79,19 @@ Response
   {    
     "sessionid": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
     "greeting":{
-      "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
-      "content":{
-             "chatbotActionSendMessageLinks": [],
-            "message": "Hi there! I'm a chatbot, here to help answer your questions.",
-            "nextActionId": "00000000-0000-0000-0000-000000000000",
-            "typingDelay": 1
-        ]
-      }
-    }    
+          "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
+          "content":[{
+              "type":"chatbotActionSendMessage",
+              "content":{
+                      "chatbotActionSendMessageLinks": [],
+                    "message": "Hi there! I'm a chatbot, here to help answer your questions.",
+                    "nextActionId": "00000000-0000-0000-0000-000000000000",
+                    "typingDelay": 1
+              }
+    }]
+    }
+    
+    
   }
 ```
 ### Delete The Chatbot Session
@@ -115,14 +119,14 @@ Response
 
 ```
 
-### Create a Chatbot Dialog
-`POST /bot/chatbotSession/{chatbotSessionId}/dialogs`
+### Create a Chatbot Interaction
+`POST /bot/chatbotSession/{chatbotSessionId}/interactions`
 
 #### Parameters
 
 Request body
 
-The request body  is: [ChatbotQuestion](#chatbotquestion-object) Object
+The request body  is: [ChatbotInput](#chatbotinput-object) Object
 
 example:
 ```Json 
@@ -132,7 +136,7 @@ example:
 ```
 
 #### Response
-the response is: [ChatbotAnswer](#chatbotanswer-object) Object
+the response is: [ChatbotOutput](#chatbotoutput-object) Object
 
 #### Example
 Using curl
@@ -148,8 +152,7 @@ Response
 
   {    
     "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
-    "content":{
-      "responses":[
+    "content":[
         {
           "type":"chatbotActionSendMessage",
           "content": {
@@ -159,8 +162,7 @@ Response
             "typingDelay": 1
           }
         }
-      ]
-    }   
+      ]  
   }
 ```
 
@@ -172,24 +174,44 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `id` | Guid  | | sessionId |
-  | `dialogs` |  [ChatbotDialog](#chatbotdialog-object)[] Object |  |  |
+  | `interactions` |  [ChatbotInteraction](#chatbotinteraction-object)[] Object |  |  |
   | `context` | ChatbotSessionContext Object  |   |  |
-### ChatbotDialog Object
+### ChatbotInteraction Object
 
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `id` | Guid  | | dialogId |
-  | `question` |  [ChatbotQuestion](#chatbotquestion-object) Object|  |  |
-  | `answer` |  [ChatbotAnswer](#chatbotanswer-object) Object |  |  |
-### ChatbotQuestion Object
+  | `input` |  [ChatbotInput](#chatbotinput-object) Object|  |  |
+  | `output` |  [ChatbotOutput](#chatbotoutput-object) Object |  |  |
+### ChatbotInput Object
 
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `id` | Guid  | | questionId |
-  | `textInput` | String  | |  |
+  | `type` | String  | | 	type of the response,including`text`,`audio`,`location`,`form`,`option` |
+  | `content` | object  | | [textInput](#textinput-object), [audioInput](#audioinput-object), [locationInput](#locationinput-object), [optionInput](#optioninput-object), [formInput](#forminput-object),  |
+  | `isNewQuestion` | bool  | | is a new Question or not |
+
+  ### TextInput Object
+  |Name| Type | Default | Description | 
+  | - | - | :-: | - | 
+  | `text` | String  | |  |
+  ### AudioInput Object
+  |Name| Type | Default | Description | 
+  | - | - | :-: | - | 
+  | `text` | String  | |  |
+  | `audio` | String  | |  |
+  ### LocationInput Object
+  |Name| Type | Default | Description | 
+  | - | - | :-: | - | 
   | `location` | String  | | the longitude and latitude of the location, e.g. "-39.900000,116.300000" |
-  | `nextActionId` | String  | |nextActionId |
-  | `variables` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
+  ### OptionInput Object
+  |Name| Type | Default | Description | 
+  | - | - | :-: | - | 
+| `optionId` | String  | |optionId |
+  ### FormInput Object
+  |Name| Type | Default | Description | 
+  | - | - | :-: | - |
   | `formValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
   ### FieldValue Object
 
@@ -198,7 +220,7 @@ Response
 |`name` | string |  | the name of a field in a form. |
 |`value` | string |  | the value of a field. |
 
-### ChatbotAnswer Object
+### ChatbotOutput Object
   ChatbotMessage Object is represented as simple flat JSON objects with the following keys:  
 
   |Name| Type| Default | Description     |
@@ -224,7 +246,6 @@ Response
   | - | - | :-: | - | 
   |`message` | string |  | string  |
   |`chatbotActionSendMessageLinks` | [button](#button-object) object |  |   |
-  |`nextActionId` | string |  | string  |
  #### QuickReply Object
 Text Response is represented as simple flat json objects with the following keys:
 
@@ -240,7 +261,6 @@ Text Response is represented as simple flat json objects with the following keys
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`optionId` | Guid |  |   |
-  |`nextActionId` | Guid |  |   |
   |`order` | int |  |   |
   |`text` | String |  |   |
   |`type` | String | text |   |
@@ -251,7 +271,6 @@ Text Response is represented as simple flat json objects with the following keys
   | - | - | :-: | - | 
   |`imageUrl` | string |  | string  |
   |`message` | string |  | string  |
-  |`nextActionId` | string |  | string  |
   #### SendVideo Object
   Text Response is represented as simple flat json objects with the following keys:
 
@@ -259,16 +278,16 @@ Text Response is represented as simple flat json objects with the following keys
   | - | - | :-: | - | 
   |`videoUrl` | string |  | string  |
   |`message` | string |  | string  |
-  |`nextActionId` | string |  | string  |
   #### SSOLoginButton Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`failedActionId` | Guid |  |   |
+  |`failedOptionId` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
   |`loginButtonText` | string |  | string  |
-  |`loginInActionId` | Guid |  |   |
+  |`loginUrl` | string |  | string  |
+  |`loginInOptionId` | Guid |  |   |
   |`message` | string |  | string  |
  #### CollectLocation Object
 Text Response is represented as simple flat json objects with the following keys:
@@ -276,16 +295,15 @@ Text Response is represented as simple flat json objects with the following keys
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`buttonText` | string |  | string  |
-  |`failedActionId` | Guid |  |   |
+  |`failedOptionId` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
-  |`successedActionId` | Guid |  |   |
+  |`successedOptionId` | Guid |  |   |
   |`message` | string |  | string  |
 #### CollectComment Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`nextActionId` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
   |`message` | string |  | string  |
   #### CollectName Object
@@ -293,7 +311,6 @@ Text Response is represented as simple flat json objects with the following keys
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`nextActionId` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
   |`message` | string |  | string  |
   #### CollectEmail Object
@@ -301,7 +318,6 @@ Text Response is represented as simple flat json objects with the following keys
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`nextActionId` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
   |`message` | string |  | string  |
   #### CollectCompany Object
@@ -309,7 +325,6 @@ Text Response is represented as simple flat json objects with the following keys
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`nextActionId` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
   |`message` | string |  | string  |
   #### CollectPhoneNumber Object
@@ -317,7 +332,6 @@ Text Response is represented as simple flat json objects with the following keys
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`nextActionId` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
   |`message` | string |  | string  |
   #### CollectVariableData Object
@@ -325,7 +339,6 @@ Text Response is represented as simple flat json objects with the following keys
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`nextActionId` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
   |`message` | string |  | string  |
   |`options` | array |  |   |
@@ -338,7 +351,6 @@ Text Response is represented as simple flat json objects with the following keys
   | - | - | :-: | - | 
   |`transferTo` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
-  |`whenAgentOfflineToActionId` | Guid |  |   |
   |`type` | string |  | type:transferToAgent,transferToDepartment  |
   #### GotoTaskbot Object
 Text Response is represented as simple flat json objects with the following keys:
@@ -346,8 +358,8 @@ Text Response is represented as simple flat json objects with the following keys
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`buttonText` | string |  | string  |
-  |`failedActionId` | Guid |  |   |
-  |`successedActionId` | Guid |  |   |
+  |`failedOptionId` | Guid |  |   |
+  |`successedOptionId` | Guid |  |   |
   |`isInputAreaEnabled` | bool |  |   |
   |`message` | string |  | string  |
 
