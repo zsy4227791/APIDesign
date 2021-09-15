@@ -91,8 +91,7 @@ Response
               }
     }]
     }
-    
-    
+
   }
 ```
 ### Delete The Chatbot Session
@@ -132,7 +131,10 @@ The request body  is: [ChatbotInput](#chatbotinput-object) Object
 example:
 ```Json 
   {
-    "textInput":"i want to buy NBN"
+    "input":{
+      "type":"text",
+      "textInput":"i want to buy NBN"
+    }
   }
 ```
 
@@ -143,7 +145,10 @@ the response is: [ChatbotOutput](#chatbotoutput-object) Object
 Using curl
 ```
 curl -H "Content-Type: application/json" -d '{
-    "textInput":"i want to buy NBN"
+    "input":{
+      "type":"text",
+      "textInput":"i want to buy NBN"
+    }
   }' -X POST https://domain.comm100.com/api/v4/bot/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/dialogs
 ```
 Response
@@ -151,19 +156,21 @@ Response
   HTTP/1.1 200 OK
   Content-Type:  application/json
 
-  {    
-    "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
-    "content":[
-        {
-          "type":"chatbotActionSendMessage",
-          "content": {
-            "chatbotActionSendMessageLinks": [],
-            "message": "Hi there! I'm a chatbot, here to help answer your questions.",
-            "nextActionId": "00000000-0000-0000-0000-000000000000",
-            "typingDelay": 1
-          }
-        }
-      ]  
+  { 
+    "output":{
+          "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
+          "content":[
+              {
+                "type":"chatbotActionSendMessage",
+                "content": {
+                  "chatbotActionSendMessageLinks": [],
+                  "message": "Hi there! I'm a chatbot, here to help answer your questions.",
+                  "nextActionId": "00000000-0000-0000-0000-000000000000",
+                  "typingDelay": 1
+                }
+              }
+          ]
+    }   
   }
 ```
 ### Update The Variables
@@ -236,13 +243,11 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `text` | String  | |  |
-  | `isNewQuestion` | bool  | | is a new Question or not |
   ### AudioInput Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `text` | String  | |  |
   | `audio` | String  | |  |
-  | `isNewQuestion` | bool  | | is a new Question or not |
   ### LocationInput Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
@@ -289,12 +294,12 @@ Response
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`type` | string | | type of the response,including `SendMessage`,`QuickReply`、 `SendImage`、`SendVideo`、`Authenrization`,`CollectLocation`, `CollectCompany`, `CollectEmail`, `CollectName`, `CollectPhoneNumber`, `CollectComment`,`CollectVariableData`,`SendForm`,`TransferChat`,`GotoTaskBot` |
-  | `content` | object | |  response's content. when type is `SendMessage`, it represents [SendMessage](#sendmessage-object); when type is `QuickReply`,it represents [QuickReply](#quickreply-object);when type is `SendImage`,it represents [SendImage](#sendimage-object);when type is `SendVideo`,it represents [SendVideo](#sendvideo-object); when type is `Authenrization`, it represents [Authenrization](#ssologinbutton-object);when type is `CollectLocation`, it represents [CollectLocation](#collectlocation-object);when type is `CollectCompany`, it represents [CollectCompany](#collectcompany-object);when type is `CollectEmail`, it represents [CollectEmail](#collectemail-object);when type is `CollectName`, it represents [CollectName](#collectname-object);when type is `CollectPhoneNumber`, it represents [CollectPhoneNumber](#collectphonenumber-object);when type is `CollectComment`, it represents [CollectComment](#collectcomment-object);when type is `CollectVariableData`, it represents [CollectVariableData](#collectvariabledata-object);when type is `SendForm`, it represents [SendForm](#sendform-object);when type is `TransferChat`, it represents [TransferChat](#transferchat-object);when type is `GotoTaskbot`,  it represents [GotoTaskbot](#gototaskbot-object); |
+  |`type` | string | | type of the response,including `Message`,`QuickReply`、 `Image`、`Video`、`Authenrization`,`CollectLocation`, `CollectCompany`, `CollectEmail`, `CollectName`, `CollectPhoneNumber`, `CollectComment`,`CollectVariableData`,`Form`,`TransferChat`,`GotoTaskBot` |
+  | `content` | object | |  response's content. when type is `Message`, it represents [Message](#message-object); when type is `QuickReply`,it represents [QuickReply](#quickreply-object);when type is `Image`,it represents [Image](#sendimage-object);when type is `Video`,it represents [Video](#sendvideo-object); when type is `Authenrization`, it represents [Authenrization](#ssologinbutton-object);when type is `CollectLocation`, it represents [CollectLocation](#collectlocation-object);when type is `CollectCompany`, it represents [CollectCompany](#collectcompany-object);when type is `CollectEmail`, it represents [CollectEmail](#collectemail-object);when type is `CollectName`, it represents [CollectName](#collectname-object);when type is `CollectPhoneNumber`, it represents [CollectPhoneNumber](#collectphonenumber-object);when type is `CollectComment`, it represents [CollectComment](#collectcomment-object);when type is `CollectVariableData`, it represents [CollectVariableData](#collectvariabledata-object);when type is `Form`, it represents [Form](#form-object);when type is `TransferChat`, it represents [TransferChat](#transferchat-object);|
   |`disableChatInputArea` | bool | false | Only available when channel is  `Live Chat`. |
   |`delayTime` | decimal | 1 | how many seconds delay to show  |
 
-#### SendMessage Object
+#### Message Object
   Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
@@ -319,14 +324,14 @@ Text Response is represented as simple flat json objects with the following keys
   |`order` | int |  |   |
   |`text` | String |  |   |
   |`type` | String | text |   |
-#### SendImage Object
+#### Image Object
   Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`imageUrl` | string |  | string  |
   |`message` | string |  | string  |
-  #### SendVideo Object
+  #### Video Object
   Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
@@ -404,7 +409,7 @@ Text Response is represented as simple flat json objects with the following keys
   |`isInputAreaEnabled` | bool |  |   |
   |`type` | string |  | type:transferToAgent,transferToDepartment  |
 
-### SendForm Object
+### Form Object
 FormReplyResponse is represented as simple flat json objects with the following keys:
 
 |Name| Type| Default | Description     | 
