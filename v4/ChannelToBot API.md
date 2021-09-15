@@ -133,7 +133,9 @@ example:
   {
     "input":{
       "type":"text",
-      "textInput":"i want to buy NBN"
+      "content":{
+        "text":"i want to buy NBN"
+      }
     }
   }
 ```
@@ -147,7 +149,9 @@ Using curl
 curl -H "Content-Type: application/json" -d '{
     "input":{
       "type":"text",
-      "textInput":"i want to buy NBN"
+      "content":{
+        "text":"i want to buy NBN"
+      }
     }
   }' -X POST https://domain.comm100.com/api/v4/bot/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/dialogs
 ```
