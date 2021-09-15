@@ -256,7 +256,7 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `location` | String  | | the longitude and latitude of the location, e.g. "-39.900000,116.300000" |
-  | `isSuccess` | bool  | true|  |
+  | `action` | string  | | submit, cancel |
 
   ### OptionInput Object
   |Name| Type | Default | Description | 
@@ -267,11 +267,11 @@ Response
   | - | - | :-: | - |
   | `formValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
   | `formId` | Guid  | |  |
-  | `isSuccess` | bool  |true|  |
+ | `action` | string  | | submit, cancel |
   ### Transferchat Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
-  | `isSuccess` | bool  |true |  |
+  | `action` | string  | | submit, cancel |
   
 ### FieldValue Object
 
@@ -298,9 +298,8 @@ Response
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`type` | string | | type of the response,including `Message`,`QuickReply`、 `Image`、`Video`、`Authenrization`,`CollectLocation`, `CollectCompany`, `CollectEmail`, `CollectName`, `CollectPhoneNumber`, `CollectComment`,`CollectVariableData`,`Form`,`TransferChat`,`GotoTaskBot` |
-  | `content` | object | |  response's content. when type is `Message`, it represents [Message](#message-object); when type is `QuickReply`,it represents [QuickReply](#quickreply-object);when type is `Image`,it represents [Image](#sendimage-object);when type is `Video`,it represents [Video](#sendvideo-object); when type is `Authenrization`, it represents [Authenrization](#ssologinbutton-object);when type is `CollectLocation`, it represents [CollectLocation](#collectlocation-object);when type is `CollectCompany`, it represents [CollectCompany](#collectcompany-object);when type is `CollectEmail`, it represents [CollectEmail](#collectemail-object);when type is `CollectName`, it represents [CollectName](#collectname-object);when type is `CollectPhoneNumber`, it represents [CollectPhoneNumber](#collectphonenumber-object);when type is `CollectComment`, it represents [CollectComment](#collectcomment-object);when type is `CollectVariableData`, it represents [CollectVariableData](#collectvariabledata-object);when type is `Form`, it represents [Form](#form-object);when type is `TransferChat`, it represents [TransferChat](#transferchat-object);|
-  |`disableChatInputArea` | bool | false | Only available when channel is  `Live Chat`. |
+  |`type` | string | | type of the response,including `Message`,`QuickReply`、 `Image`、`Video`、`Authentication`,`Location`,`VariableData`,`Form`,`TransferChat`|
+  | `content` | object | |  response's content. when type is `Message`, it represents [Message](#message-object); when type is `QuickReply`,it represents [QuickReply](#quickreply-object);when type is `Image`,it represents [Image](#sendimage-object);when type is `Video`,it represents [Video](#sendvideo-object); when type is `Authentication`, it represents [Authentication](#authentication-object);when type is `Location`, it represents [Location](#collectlocation-object);when type is `VariableData`, it represents [VariableData](#variabledata-object);when type is `Form`, it represents [Form](#form-object);when type is `TransferChat`, it represents [TransferChat](#transferchat-object);|
   |`delayTime` | decimal | 1 | how many seconds delay to show  |
 
 #### Message Object
@@ -310,15 +309,25 @@ Response
   | - | - | :-: | - | 
   |`message` | string |  | string  |
   |`chatbotActionSendMessageLinks` | [button](#button-object) object |  |   |
+ #### Button Object
+Text Response is represented as simple flat json objects with the following keys:
+
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`buttonText` | String |  |   |
+  |`url` | String |  |   |
+  |`type` | String |  | webPage,webview|
+  |`openStyle` | String |  | full,tall,compact  |
+  |`openIn` | String |  | newWindow, sideWindow,currentWindow|
+  |`order` | int |  |   |
  #### QuickReply Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`isInputAreaEnabled` | bool |  |   |
+  |`isForce` | bool |  | must select and can not input  text  |
   |`message` | string |  | string  |
   |`options` | [option](#option-object) |  |   |
-  |`otherResponseToActionId` | Guid |  |   |
    #### Option Object
 Text Response is represented as simple flat json objects with the following keys:
 
@@ -335,74 +344,42 @@ Text Response is represented as simple flat json objects with the following keys
   | - | - | :-: | - | 
   |`imageUrl` | string |  | string  |
   |`message` | string |  | string  |
-  #### Video Object
+#### Video Object
   Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`videoUrl` | string |  | string  |
   |`message` | string |  | string  |
-  #### Login Object
+#### Authentication Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`isInputAreaEnabled` | bool |  |   |
+  |`isForce` | bool |  | must login and can not input  text  |
   |`loginButtonText` | string |  | string  |
   |`loginUrl` | string |  | string  |
   |`message` | string |  | string  |
+
  #### CollectLocation Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`buttonText` | string |  | string  |
-  |`isInputAreaEnabled` | bool |  |   |
+  |`isForce` | bool |  | must location and can not input  text  |
   |`message` | string |  | string  |
-#### CollectComment Object
-Text Response is represented as simple flat json objects with the following keys:
 
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`isInputAreaEnabled` | bool |  |   |
-  |`message` | string |  | string  |
-  #### CollectName Object
-Text Response is represented as simple flat json objects with the following keys:
 
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`isInputAreaEnabled` | bool |  |   |
-  |`message` | string |  | string  |
-  #### CollectEmail Object
-Text Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`isInputAreaEnabled` | bool |  |   |
-  |`message` | string |  | string  |
-  #### CollectCompany Object
-Text Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`isInputAreaEnabled` | bool |  |   |
-  |`message` | string |  | string  |
-  #### CollectPhoneNumber Object
-Text Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`isInputAreaEnabled` | bool |  |   |
-  |`message` | string |  | string  |
   #### CollectVariableData Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`isInputAreaEnabled` | bool |  |   |
+  |`isForce` | bool |  | must input variable  |
   |`message` | string |  | string  |
   |`options` | array |  |   |
-  |`type` | string |  | type:integer,singleselect,multiselect,text,textarea，decimal，email，password，date，time |
+  |`type` | string |  | type:`integer`,`singleselect`,`multiselect`,`text`,`textarea`，`decimal`，`email`，`password`，`date`，`time` |
   |`variableName` | string |  | string  |
   #### TransferChat Object
 Text Response is represented as simple flat json objects with the following keys:
@@ -410,8 +387,8 @@ Text Response is represented as simple flat json objects with the following keys
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`transferTo` | Guid |  |   |
-  |`isInputAreaEnabled` | bool |  |   |
-  |`type` | string |  | type:transferToAgent,transferToDepartment  |
+  |`isForce` | bool |  | must transfer chat  |
+  |`type` | string |  | type:`transferToAgent`,`transferToDepartment`  |
 
 ### Form Object
 FormReplyResponse is represented as simple flat json objects with the following keys:
