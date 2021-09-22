@@ -21,6 +21,7 @@
 ## ChatbotInteraction  
   - `POST /bot/chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)
 ## ChatbotSessionVariable
+  - `GET /bot/chatbotSessions/{id}/variables` - [get the variables of the Chatbot Session ](#get-the-variables)
   - `PUT /bot/chatbotSessions/{id}/variables` - [Update the variables of the Chatbot Session ](#update-the-variables)
 
 # Endpoints
@@ -177,6 +178,51 @@ Response
     }   
   }
 ```
+### Get The Variables
+`GET /bot/chatbotSession/{chatbotSessionId}/variables`
+
+#### Parameters
+Path parameters
+
+  | Name  | Type | Required  | Description |     
+  | - | - | - | - | 
+  | `chatbotSessionId` | Guid | yes  |  the unique id of the Chatbot Session |  
+
+Request body
+
+#### Response
+  | Name  | Type | Required  | Description |     
+  | - | - | - | - | 
+|`variables` |[VariableValue](#variablevalue-object)[]  | |  an array of [VariableValue](#variablevalue-object) objects  |
+
+```Json 
+  {
+    "variables":[
+      {
+        "name":"ename",
+        "value":"leon"
+      }
+    ]
+  }
+```
+
+#### Example
+Using curl
+```
+curl -H "Content-Type: application/json"  -X GET https://domain.comm100.com/api/v4/bot/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/variables
+```
+Response
+```Json
+  HTTP/1.1 200 OK
+    {
+    "variables":[
+      {
+        "name":"ename",
+        "value":"leon"
+      }
+    ]
+  }
+```
 ### Update The Variables
 `PUT /bot/chatbotSession/{chatbotSessionId}/variables`
 
@@ -209,9 +255,14 @@ example:
 #### Example
 Using curl
 ```
-curl -H "Content-Type: application/json" -d '{
-    "value":"leon"
-  }' -X PUT https://domain.comm100.com/api/v4/bot/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/variables/name
+curl -H "Content-Type: application/json" -d '  {
+    "variables":[
+      {
+        "name":"ename",
+        "value":"leon"
+      }
+    ]
+  }' -X PUT https://domain.comm100.com/api/v4/bot/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/variables
 ```
 Response
 ```Json
