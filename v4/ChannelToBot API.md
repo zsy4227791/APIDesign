@@ -58,7 +58,7 @@ The Response body contains data with the follow structure:
   | Name | Type |  Description |    
   | - | - | :-: | 
   |`sessionId` | Guid | the unique id of the session |
-  |`greeting`  |  [ChatbotAnswer](#chatbotanswer-object) Object    |  |
+  |`greeting`  |  [ChatbotOutput](#chatbotoutput-object) Object    |  |
 
 
 #### Example
@@ -79,7 +79,7 @@ Response
   Content-Type:  application/json
 
   {    
-    "sessionid": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
+    "sessionId": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
     "greeting":{
           "id":"d3f5b968-ad51-42af-b759-64c0afc40b84",
           "content":[{
