@@ -359,7 +359,7 @@ Response
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`message` | string |  | string  |
-  |`chatbotActionSendMessageLinks` | [button](#button-object) object |  |   |
+  |`chatbotActionSendMessageLinks` | [button](#button-object) object []|  |   |
  #### Button Object
 Text Response is represented as simple flat json objects with the following keys:
 
