@@ -38,7 +38,7 @@ The request body contains data with the follow structure:
   | - | - | :-: | :-: | - | 
   | `chatbotId` | Guid | yes | |  the unique id of the bot |
   | `channel` | string | yes | |  the channel of the bot |
-  | `visitor`  |  [SessionVisitorInfo](#sessionvisitorinfo-object) Object  |no |   |  |
+  | `visitor`  |  [SessionVisitorInfo](#sessionvisitorinfo-object)  |no |   |  |
 
 example:
 ```Json 
@@ -59,7 +59,7 @@ The Response body contains data with the follow structure:
   | Name | Type |  Description |    
   | - | - | :-: | 
   |`sessionId` | string | the unique id of the session |
-  |`content`  |  [GeneralResponse](#GeneralResponse-object) Object    |  |
+  |`content`  |  [GeneralResponse](#GeneralResponse-object)[]     |  |
 
 
 #### Example
@@ -202,7 +202,7 @@ Request body
 #### Response
   | Name  | Type | Required  | Description |     
   | - | - | - | - | 
-|`variables` |[VariableValue](#variablevalue-object)[]  | |  an array of [VariableValue](#variablevalue-object) objects  |
+|`variables` |[VariableValue](#variablevalue-object)[]  | |  an array of [VariableValue](#variablevalue-object)  |
 
 ```Json 
   {
@@ -245,7 +245,7 @@ Path parameters
 Request body
   | Name  | Type | Required  | Description |     
   | - | - | - | - | 
-|`variables` |[VariableValue](#variablevalue-object)[]  | |  an array of [VariableValue](#variablevalue-object) objects  |
+|`variables` |[VariableValue](#variablevalue-object)[]  | |  an array of [VariableValue](#variablevalue-object)  |
 example:
 ```Json 
   {
@@ -286,7 +286,7 @@ Response
   | - | - | :-: | - | 
   | `chatbotId` | Guid  | | chatbotId |  
   | `channel` | string  | | including`Live Chat`,`Facebook Messager`,`Twitter Direct Message`,`WeChat`,`WhatsApp`,`IVR`,`SMS`,`Default` | 
-  | `visitor` | SessionVisitorInfo (#sessionvisitorinfo-object) Object  |   |  |
+  | `visitor` | [SessionVisitorInfo](#sessionvisitorinfo-object)  |   |  |
 
 ### CreateChatbotSessionResponse Object
    
@@ -294,17 +294,17 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `sessionId` | string  | | sessionId |  
-  | `content` | [GeneralResponse](#generalResponse-object) Object  |   |  |
+  | `content` | [GeneralResponse](#generalResponse-object)[]  |   |  |
 ### InteractionRequest Object
 
   |Name| Type | Default | Description | 
   | - | - | :-: | - |   
-  | `input` |  [ChatbotInput](#chatbotinput-object) Object|  |  |  
+  | `input` |  [ChatbotInput](#chatbotinput-object)|  |  |  
 ### InteractionResponse Object
 
   |Name| Type | Default | Description | 
   | - | - | :-: | - |     
-  | `output` |  [ChatbotOutput](#chatbotoutput-object) Object |  |  |
+  | `output` |  [ChatbotOutput](#chatbotoutput-object)|  |  |
 
 ### ChatbotInput Object
 
@@ -331,13 +331,13 @@ Response
   ### InputOption Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
-| `optionId` | String  | |optionId |
+  | `optionId` | String  | |optionId |
   ### InputForm Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - |
-  | `formValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) objects |
+  | `formValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) |
   | `formId` | Guid  | |  |
- | `action` | string  | | submit, cancel |
+  | `action` | string  | | submit, cancel |
   ### InputTransferChat Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
@@ -372,13 +372,13 @@ Response
   | `content` | object | |  response's content. when type is `Text`, it represents [OutputText](#outputtext-object); when type is `QuickReply`,it represents [OutputQuickReply](#outputquickreply-object);when type is `Image`,it represents [OutputImage](#outputimage-object);when type is `Video`,it represents [OutputVideo](#outputvideo-object); when type is `Authentication`, it represents [OutputAuthentication](#outputauthentication-object);when type is `Location`, it represents [OutputLocation](#outputLocation-object);when type is `VariableData`, it represents [OutputVariableData](#outputvariabledata-object);when type is `Form`, it represents [OutputForm](#form-object);when type is `TransferChat`, it represents [OutputTransferChat](#transferchat-object);|
   |`delayTime` | decimal | 1 | how many seconds delay to show  |
 
-#### OutputText Object
+### OutputText Object
   Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`message` | string |  | string  |
-  |`Links` | [TextLink](#textLink-object) object []|  |   |
+  |`Links` | [TextLink](#textLink-object)[]|  |   |
  #### TextLink Object
 Text Response is represented as simple flat json objects with the following keys:
 
@@ -390,38 +390,30 @@ Text Response is represented as simple flat json objects with the following keys
   |`openStyle` | String |  | full,tall,compact  |
   |`openIn` | String |  | newWindow, sideWindow,currentWindow|
   |`order` | int |  |   |
- #### OutputQuickReply Object
+ ### OutputQuickReply Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - |   
   |`message` | string |  | string  |
-  |`options` | [option](#option-object) |  |   |
+  |`options` | [option](#option-object)[] |  |   |
   |`isForce` | bool |  | must select and can not input  text  |
-   #### Option Object
-Text Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`optionId` | Guid |  |   |
-  |`order` | int |  |   |
-  |`text` | String |  |   |
-  |`type` | String | text | type of the option,including `TriggerAnIntent`,`ContactAnAgent`、 `Text`  |
-#### OutputImage Object
+   
+### OutputImage Object
   Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`imageUrl` | string |  | string  |
   |`message` | string |  | string  |
-#### OutputVideo Object
+### OutputVideo Object
   Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`videoUrl` | string |  | string  |
   |`message` | string |  | string  |
-#### OutputAuthentication Object
+### OutputAuthentication Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
@@ -431,7 +423,7 @@ Text Response is represented as simple flat json objects with the following keys
   |`loginUrl` | string |  | string  |
   |`message` | string |  | string  |
 
- #### OutputLocation Object
+ ### OutputLocation Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
@@ -441,24 +433,24 @@ Text Response is represented as simple flat json objects with the following keys
   |`message` | string |  | string  |
 
 
-  #### OutputVariableData Object
+  ### OutputVariableData Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`isForce` | bool |  | must input variable  |
   |`message` | string |  | string  |
-  |`options` | [option] (#option-object) |  |   |
+  |`options` | [option](#option-object)[] |  |   |
   |`type` | string |  | type:`text`,`textarea`,`singleselect`,`checkbox`,`multiselect`,`email`,`password`,`date`，`time` ,`integer`,`decimal`|
   |`variableName` | string |  | string  |
-  #### OutputTransferChat Object
+  ### OutputTransferChat Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`transferTo` | Guid |  |   |
   |`isForce` | bool |  | must transfer chat  |
-  |`type` | string |  | type:`transferToAgent`,`transferToDepartment`  |
+  |`type` | string |  | type:`transferToAgent`,`transferToDepartment`,`transferRoutingRules`  |
 
 ### OutputForm Object
 FormReplyResponse is represented as simple flat json objects with the following keys:
@@ -468,14 +460,14 @@ FormReplyResponse is represented as simple flat json objects with the following 
 |`message` | string |   | A separate message which is sent before the button is sent.|
 |`title` | string |  | when a button is sent to visitor, clicking this button will open a form that contains information bot wants to collect from the visitor. the title refers to the title of that form, and it is also placed on the button as a name.|
 |`isConfirmationRequired` | bool |   | whether visitor needs to click confirm after filling out the information in a form.|
-|`fields` | [ChatbotActionSendFormField](#ChatbotActionSendFormField-object)[] | | an array of [Field](#field-object) Object |
+|`fields` | [ChatbotActionSendFormField](#ChatbotActionSendFormField-object)[] | | an array of [ChatbotActionSendFormField](#ChatbotActionSendFormField-object)  |
 |`submitButtonText` | string |   | |
 |`cancelButtonText` | string |   | |
 |`confirmButtonText` | string |   | |
 |`isforce` | string |   | |
 
 
-### ChatbotActionSendFormField Object
+#### ChatbotActionSendFormField Object
 Field is represented as simple flat json objects with the following keys:
 
 |Name| Type| Default | Description     | 
@@ -489,6 +481,15 @@ Field is represented as simple flat json objects with the following keys:
 |`order` | integer |  | must greater than or equal 0, ascending sort |
 |`variableName` | string |  |  |
 
+### Option Object
+Text Response is represented as simple flat json objects with the following keys:
+
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`optionId` | Guid |  |   |
+  |`order` | int |  |   |
+  |`text` | String |  |   |
+  |`type` | String | text | type of the option,including `TriggerAnIntent`,`ContactAnAgent`、 `Text`  |
 ### SessionVisitorInfo Object
 
 |Name| Type|  Default |  Description     |
