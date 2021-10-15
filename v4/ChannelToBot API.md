@@ -440,7 +440,7 @@ Text Response is represented as simple flat json objects with the following keys
   | - | - | :-: | - | 
   |`isForce` | bool |  | must input variable  |
   |`message` | string |  | string  |
-  |`options` | [option] (#option-object)[] |  |   |
+  |`options` | [option](#option-object)[] |  |   |
   |`type` | string |  | type:`text`,`textarea`,`singleselect`,`checkbox`,`multiselect`,`email`,`password`,`date`，`time` ,`integer`,`decimal`|
   |`variableName` | string |  | string  |
   ### OutputTransferChat Object
@@ -460,7 +460,7 @@ FormReplyResponse is represented as simple flat json objects with the following 
 |`message` | string |   | A separate message which is sent before the button is sent.|
 |`title` | string |  | when a button is sent to visitor, clicking this button will open a form that contains information bot wants to collect from the visitor. the title refers to the title of that form, and it is also placed on the button as a name.|
 |`isConfirmationRequired` | bool |   | whether visitor needs to click confirm after filling out the information in a form.|
-|`fields` | [ChatbotActionSendFormField](#ChatbotActionSendFormField-object)[] | | an array of [Field](#ChatbotActionSendFormField-object)  |
+|`fields` | [ChatbotActionSendFormField](#ChatbotActionSendFormField-object)[] | | an array of [ChatbotActionSendFormField](#ChatbotActionSendFormField-object)  |
 |`submitButtonText` | string |   | |
 |`cancelButtonText` | string |   | |
 |`confirmButtonText` | string |   | |
