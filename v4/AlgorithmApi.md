@@ -108,8 +108,6 @@ example:
         {
             "groupid":"2",
             "groupName":"are you ok",
-            "questions":"are you ok?",  
-            }],
             "questions": [{
                     "id":"121",
                     "question":"are you ok?",
@@ -117,7 +115,7 @@ example:
                     "id":"121",
                     "question":"are you ok?",  
                 }]
-        }
+        }]
   }
 ```
 
@@ -131,7 +129,7 @@ HTTP/1.1 200 OK
 #### Example
 Using curl
 ```
-curl -H "Content-Type: application/json" -d '   {
+curl -H "Content-Type: application/json" -d '     {
     "taskId": "10000",
     "result":  [{
             "groupId":"1",
@@ -140,14 +138,13 @@ curl -H "Content-Type: application/json" -d '   {
                     "id":"121",
                     "question":"are you ok?",
                 },{
-                    "id":"121",
+                    "id":"122",
                     "question":"are you ok?",  
                 }],
         },
         {
             "groupid":"2",
-            "questions":"are you ok?",  
-            }],
+            "groupName":"are you ok",
             "questions": [{
                     "id":"121",
                     "question":"are you ok?",
@@ -155,7 +152,7 @@ curl -H "Content-Type: application/json" -d '   {
                     "id":"121",
                     "question":"are you ok?",  
                 }]
-        }
+        }]
   }' -X POST https://domain.comm100.com/api/bot/alg/group/groups
 ```
 Response
