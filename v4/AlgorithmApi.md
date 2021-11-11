@@ -1,8 +1,7 @@
   | Change Version | API Version | Change nots | Change Date | Author |
   | - | - | - | - | - |
   | 4.0 | v4 | Bot API | 2021-11-1 | Leon |  
- 
-# LearningGrouping & QuickReply Matching
+# Learning Grouping 
   - [LearningGroupingTask](#learning-grouping-task-object)
      - [LearningGroup](#learning-group-object)
         - [LearningQuestion](#learning-question-object)
@@ -13,7 +12,7 @@
    - `POST /bot/alg/estimate` - [Create a new grouping time estimate](#create-a-new-grouping-time-estimate)
    - `POST /bot/alg/groups` - [Return a grouping task result](#return-a-grouping-task-result)   
 
-# QuickReply
+# QuickReply Matching
 ## Algorithm Server Api
 - `POST /quickreplys` - [Create a new quickreply task](#create-a-new-quickreply-task)
 # Endpoints
