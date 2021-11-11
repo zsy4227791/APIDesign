@@ -32,8 +32,7 @@ The request body contains data with the follow structure:
 example:
 ```Json 
   {
-    "siteId": "10000",
-    "chatbotId": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
+    "taskId": "10000",
     "mode":"accurate",
     "questions": [{
         "id":"121",
@@ -57,8 +56,7 @@ HTTP/1.1 200 OK
 Using curl
 ```
 curl -H "Content-Type: application/json" -d '  {
-    "siteId": "10000",
-    "chatbotId": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
+    "taskId": "10000",
     "mode":"accurate",
     "questions": [{
         "id":"121",
