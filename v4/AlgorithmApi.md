@@ -39,7 +39,7 @@ example:
         "id":"121",
         "question":"are you ok?",
       },{
-        "id":"121",
+        "id":"122",
         "question":"are you ok?",  
       }]
     }
@@ -64,8 +64,8 @@ curl -H "Content-Type: application/json" -d '  {
         "id":"121",
         "question":"are you ok?",
       },{
-        "id":"121",
-        "question":"are you ok?",  
+        "id":"122",
+        "question":"are you okdd?",  
       }]
     }
   }' -X POST https://algorithm.comm100.com/api/groups
@@ -103,12 +103,13 @@ example:
                     "id":"121",
                     "question":"are you ok?",
                 },{
-                    "id":"121",
+                    "id":"122",
                     "question":"are you ok?",  
                 }],
         },
         {
             "groupid":"2",
+            "groupName":"are you ok",
             "questions":"are you ok?",  
             }],
             "questions": [{
@@ -232,7 +233,6 @@ example:
 The Response body contains data with the follow structure:
   | Name | Type |  Description |    
   | - | - | :-: | 
-  |`isKnow` | bool | success recognize or not|
   |`replyName` | string | the match reply|
   |`score` | float | the score of match|
 #### Example
@@ -249,7 +249,6 @@ Response
   Content-Type:  application/json
 
   {    
-    "isKnow": true,
     "replyName": "yes",
     "score": 0.98
   }
