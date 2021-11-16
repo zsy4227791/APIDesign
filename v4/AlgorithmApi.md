@@ -9,8 +9,8 @@
 ## Algorithm Server Api
    - `POST /groups` - [Create a new grouping task](#create-a-new-grouping-task)
 ## Bot Server Api
-   - `POST /bot/alg/estimate` - [Create a new grouping time estimate](#create-a-new-grouping-time-estimate)
-   - `POST /bot/alg/groups` - [Return a grouping task result](#return-a-grouping-task-result)   
+   - `POST /botai/group/times` - [Create a new grouping time estimate](#create-a-new-grouping-time-estimate)
+   - `POST /botai/group/groups` - [Return a grouping task result](#return-a-grouping-task-result)   
 
 # QuickReply Matching
 ## Algorithm Server Api
@@ -80,7 +80,7 @@ Response
 ```
 ## Bot Server Api
 ### Return a grouping task result
-`POST /bot/alg/group/groups`
+`POST /botai/group/groups`
 #### Parameters
 Request body
 
@@ -166,7 +166,7 @@ Response
   }
 ```
 ### Create a new grouping time estimate
-`POST /bot/alg/group/times`
+`POST /botai/group/times`
 #### Parameters
 Request body
 
