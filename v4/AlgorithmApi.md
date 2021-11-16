@@ -27,12 +27,14 @@ The request body contains data with the follow structure:
   | Name | Type | Required | Default | Description |    
   | - | - | :-: | :-: | - | 
   |`taskId` |  int | yes | |  the unique id of the grouping task |
+  |`siteId` |  int | yes | |  the site id of the grouping task |
   |`mode`  |  String |yes |   | type of the response,including`accurate`,`normal`,`rough` |
   |`questions`  |  list<[Question](#learningquestiondto-object)> |yes |   | list of the question|  
 example:
 ```Json 
   {
     "taskId": "10000",
+    "siteId": "10000",    
     "mode":"accurate",
     "questions": [{
         "id":"121",
@@ -80,7 +82,7 @@ Response
 ```
 ## Bot Server Api
 ### Return a grouping task result
-`POST /botai/group/groups`
+`POST /botai/group/groups?siteId=10000`
 #### Parameters
 Request body
 
@@ -88,7 +90,8 @@ The request body contains data with the follow structure:
 
   | Name | Type | Required | Default | Description |    
   | - | - | :-: | :-: | - | 
-  |`taskId` |  int | yes | |  the unique id of the site |
+  |`taskId` |  int | yes | |  the unique id of the task |
+  |`siteId` |  int | yes | |  the unique id of the site |
   |`result`  |  list<[GroupingResult](#grouping-result-object)> |yes |   | list of the grouping result|  
 example:
 ```Json 
