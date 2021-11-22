@@ -9,12 +9,12 @@
 ## Algorithm Server Api
    - `POST /groups` - [Create a new grouping task](#create-a-new-grouping-task)
 ## Bot Server Api
-   - `POST /botai/group/times` - [Create a new grouping time estimate](#create-a-new-grouping-time-estimate)
+   - `POST /botai/group/time` - [Create a new grouping time estimate](#create-a-new-grouping-time-estimate)
    - `POST /botai/group/groups` - [Return a grouping task result](#return-a-grouping-task-result)   
 
 # QuickReply Matching
 ## Algorithm Server Api
-- `POST /quickreplys` - [Create a new quickreply task](#create-a-new-quickreply-task)
+- `POST /quickreplies` - [Create a new quickreply task](#create-a-new-quickreply-task)
 # Endpoints
 ## Algorithm Server Api
 ### Create a new grouping task
@@ -92,11 +92,15 @@ The request body contains data with the follow structure:
   | - | - | :-: | :-: | - | 
   |`taskId` |  int | yes | |  the unique id of the task |
   |`siteId` |  int | yes | |  the unique id of the site |
-  |`result`  |  list<[GroupingResult](#grouping-result-object)> |yes |   | list of the grouping result|  
+  |`result`  |  list<[GroupingResult](#grouping-result-object)> |yes |   | list of the grouping result| 
+  |`code` |  int | yes | |  0 success -1 failed | 
+  |`msg` |  int | yes | |  fail reason | 
 example:
 ```Json 
   {
     "taskId": "10000",
+    "code": 0 ,
+    "msg" : "success" ,
     "result":  [{
             "groupId":"1",
             "groupName":"are you ok",
@@ -169,7 +173,7 @@ Response
   }
 ```
 ### Create a new grouping time estimate
-`POST /botai/group/times`
+`POST /botai/group/time`
 #### Parameters
 Request body
 
@@ -197,7 +201,7 @@ Using curl
 ```
 curl -H "Content-Type: application/json" -d '   {
     "num": "10000",
-  }' -X POST https://domain.comm100.com/api/bot/alg/group/times
+  }' -X POST https://domain.comm100.com/api/botai/group/time
 ```
 Response
 ```Json
@@ -209,7 +213,7 @@ Response
   }
 ```
 ### Create a new quickreply task
-`POST /bot/alg/group/times`
+`POST /botai/group/time`
 #### Parameters
 Request body
 
@@ -217,12 +221,12 @@ The request body contains data with the follow structure:
 
   | Name | Type | Required | Default | Description |    
   | - | - | :-: | :-: | - | 
-  |`quickreplys` |  sting[] | yes | |  the quickreplys array |
+  |`quickreplies` |  sting[] | yes | |  the quickreplies array |
   |`input` |  sting | yes | |  the user input |
 example:
 ```Json 
   {
-    "quickreplys": ["yes","no"],
+    "quickreplies": ["yes","no"],
     "input":"ok",
   }
 ```
@@ -237,9 +241,9 @@ The Response body contains data with the follow structure:
 Using curl
 ```
 curl -H "Content-Type: application/json" -d '     {
-    "quickreplys": ["yes","no"],
+    "quickreplies": ["yes","no"],
     "input":"ok",
-  }' -X POST https://algorithm.comm100.com/api/quickreplys
+  }' -X POST https://algorithm.comm100.com/api/quickreplies
 ```
 Response
 ```Json
