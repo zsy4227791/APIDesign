@@ -6,19 +6,19 @@
      - [LearningGroup](#learning-group-object)
         - [LearningQuestion](#learning-question-object)
 
-## Algorithm Server Api
-   - `POST /groups` - [Create a new grouping task](#create-a-new-grouping-task)
-## Bot Server Api
+## AiGrouping Server Api
+   - `POST /AiGrouping/groups` - [Create a new grouping task](#create-a-new-grouping-task)
+## BotAi Server Api
    - `POST /botai/group/time` - [Create a new grouping time estimate](#create-a-new-grouping-time-estimate)
    - `POST /botai/group/groups` - [Return a grouping task result](#return-a-grouping-task-result)   
 
 # QuickReply Matching
-## Algorithm Server Api
-- `POST /quickreplies` - [Create a new quickreply task](#create-a-new-quickreply-task)
+## AiQuickReply Server Api
+- `POST /AiQuickReply/quickreplies` - [Create a new quickreply task](#create-a-new-quickreply-task)
 # Endpoints
-## Algorithm Server Api
+## AiGrouping Server Api
 ### Create a new grouping task
-`POST /groups`
+`POST /AiGrouping/groups`
 #### Parameters
 Request body
 
@@ -160,7 +160,7 @@ curl -H "Content-Type: application/json" -d '     {
                     "question":"are you ok?",  
                 }]
         }]
-  }' -X POST https://domain.comm100.com/api/bot/alg/group/groups
+  }' -X POST https://domain.comm100.com/api/botai/group/groups
 ```
 Response
 ```Json
@@ -213,7 +213,7 @@ Response
   }
 ```
 ### Create a new quickreply task
-`POST /botai/group/time`
+`POST /AiQuickReply/quickreplies`
 #### Parameters
 Request body
 
@@ -243,7 +243,7 @@ Using curl
 curl -H "Content-Type: application/json" -d '     {
     "quickreplies": ["yes","no"],
     "input":"ok",
-  }' -X POST https://algorithm.comm100.com/api/quickreplies
+  }' -X POST https://domain.comm100.com/api/AiQuickReply/quickreplies
 ```
 Response
 ```Json
