@@ -44,6 +44,7 @@ example:
 ```Json 
   {
     "chatbotId": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
+    "channel": "LiveChat",
     "visitor": {
         "name":"Kart",
         "email":"kart@yahoo.com",
