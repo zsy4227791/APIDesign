@@ -4,23 +4,25 @@
  
  # Summary
  ## Bot Integration Structure Diagram
-![1639547167(1)](https://user-images.githubusercontent.com/8872646/146130738-abcdba16-de82-482f-a8ac-295cbf83e2cf.png)
+![image](https://user-images.githubusercontent.com/8872646/146148176-49759463-26a6-4991-862d-3cfb59b3d9e9.png)
+
 ## Integrate Steps
-To integrate your Chatbot with Comm100 LiveChat, you only need to do the following two steps
-### 1 Build Your Bot Adaptor Service
-  As shown in the figure, establish your own Chatbot adapter service, which connects to your BOT Engine service and implements the interfaces in this API documents.
+To integrate your Chatbot with Comm100 Platform, you only need to do the following two steps:
+### 1 Building Your Bot Adaptor Service
+  As shown in the figure, You need establish your own Chatbot adaptor, which connects to your BOT Engine service and implements the interfaces in this API documents.
   You can first implement the following two important interfaces and start chatting
   - `POST /bot/chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
   - `POST /bot/chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)  
   and See [API Description](#api-description) for all interface definitions  
   and Click [Data Struct](#data-struct) to view key data structure definitions  
-### 2 Create a new Comm100 Chatbot and fill in your adaptor service base URI
+### 2 Creating a new Comm100 Chatbot and fill in your adaptor service base URI
 Create a new Chatbot in the comm100 System management background and configure it as follows   
 1 Fill in BOT name  
 2 Select "Third Party Engine" in the Engin input box   
-3 Fill in your adapter root URI in the "webhook target URL" input box, followed by "/?v=2.0"   
+3 Fill in your adapter root URI in the "webhook target URL" input box  
 4 Select the Comm100 Live Chat channel   
-![1639547150](https://user-images.githubusercontent.com/8872646/146133472-9cf7cae0-fbf8-47c8-99b7-ad447fb29d86.png)   
+![image](https://user-images.githubusercontent.com/8872646/146148035-2b0d215e-0064-45a2-bcd7-07cbd16356e5.png)
+
 
 # API Description
 ## ChatbotSession
@@ -84,7 +86,8 @@ curl -H "Content-Type: application/json" -d '{
   }' -X POST https://domain.comm100.com/api/v4/bot/chatbotSessions
 ```
 .net code example
-![image](https://user-images.githubusercontent.com/8872646/146139881-04ab3754-32de-4ce3-84da-25b270567746.png)
+![image](https://user-images.githubusercontent.com/8872646/146141066-c159e48a-6c29-476a-b380-1dd748ab6f64.png)
+
 Response
 ```Json
   HTTP/1.1 200 OK
@@ -292,7 +295,6 @@ Response
 ```
 
 # Data Struct
-  - Chatbot    a chatbot have many ChatbotSession
     - [ChatbotSession](#chatbotsession)    A ChatbotSession means a Session between the user and the chatbot
       - [ChatbotInteraction](#chatbotinteraction) One ChatbotInteraction means one user input and one Chatbot output
         - [ChatbotInput](#chatbotinput-object) One User Input
