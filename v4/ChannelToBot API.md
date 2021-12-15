@@ -15,12 +15,12 @@ To integrate your Chatbot with Comm100 LiveChat, you only need to do the followi
   and See [API Description](#api-description) for all interface definitions  
   and Click [Data Struct](#data-struct) to view key data structure definitions  
 ### 2 Create a new Chatbot and fill in your adaptor service base URI
-Create a new Chatbot in the comm100 System management background and configure it as follows  
-![1639547150](https://user-images.githubusercontent.com/8872646/146133472-9cf7cae0-fbf8-47c8-99b7-ad447fb29d86.png)  
+Create a new Chatbot in the comm100 System management background and configure it as follows   
 1 Fill in BOT name  
 2 Select "Third Party Engine" in the Engin input box   
 3 Fill in your adapter root URI in the "webhook target URL" input box, followed by "/?v=2.0"   
 4 Select the Comm100 Live Chat channel   
+![1639547150](https://user-images.githubusercontent.com/8872646/146133472-9cf7cae0-fbf8-47c8-99b7-ad447fb29d86.png)   
 
 # API Description
 ## ChatbotSession
@@ -288,12 +288,12 @@ Response
 ```
 
 # Data Struct
-  - Chatbot
-    - [ChatbotSession](#chatbotsession-object)
-      - [ChatbotInteraction](#chatbotinteraction-object)
-        - [ChatbotInput](#chatbotinput-object) 
-        - [ChatbotOutput](#chatbotoutput-object) 
-          - [ChatbotResponse](#chatbotresponse-object) 
+  - Chatbot    a chatbot have many ChatbotSession
+    - [ChatbotSession](#chatbotsession)    A ChatbotSession means a Session between the user and the chatbot
+      - [ChatbotInteraction](#chatbotinteraction) One ChatbotInteraction means one user input and one Chatbot output
+        - [ChatbotInput](#chatbotinput-object) One User Input
+        - [ChatbotOutput](#chatbotoutput-object) One Chatbot Output
+          - [ChatbotResponse](#chatbotresponse-object) one Chatbot output consists of multiple ChatbotResponse
 ### CreateChatbotSessionRequest Object
 
   |Name| Type | Default | Description | 
