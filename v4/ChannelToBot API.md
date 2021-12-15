@@ -13,17 +13,12 @@ To integrate your Chatbot with Comm100 LiveChat, you only need to do the followi
   - `POST /bot/chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
   - `POST /bot/chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)
 ### 2 Create a new Chatbot and fill in your adaptor service base URI
-Create a new Chatbot in the comm100 System management background and configure it as follows,Fill in your adapter service base URI
+Create a new Chatbot in the comm100 System management background and configure it as follows
 ![1639547150](https://user-images.githubusercontent.com/8872646/146133472-9cf7cae0-fbf8-47c8-99b7-ad447fb29d86.png)
-
-  
-
-  - Chatbot
-    - [ChatbotSession](#chatbotsession-object)
-      - [ChatbotInteraction](#chatbotinteraction-object)
-        - [ChatbotInput](#chatbotinput-object) 
-        - [ChatbotOutput](#chatbotoutput-object) 
-          - [ChatbotResponse](#chatbotresponse-object) 
+1 Fill in BOT name
+2 Select "Third Party Engine" in the Engin input box 
+3 Fill in your adapter root URI in the "webhook target URL" input box, followed by "/?v=2.0" 
+4 Select the Comm100 Live Chat channel 
 
 
 ## ChatbotSession
@@ -290,9 +285,14 @@ Response
   HTTP/1.1 200 OK
 ```
 
-# Model
+# Data Struct
+  - Chatbot
+    - [ChatbotSession](#chatbotsession-object)
+      - [ChatbotInteraction](#chatbotinteraction-object)
+        - [ChatbotInput](#chatbotinput-object) 
+        - [ChatbotOutput](#chatbotoutput-object) 
+          - [ChatbotResponse](#chatbotresponse-object) 
 ### CreateChatbotSessionRequest Object
-   
 
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
