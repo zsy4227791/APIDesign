@@ -14,7 +14,7 @@ To integrate your Chatbot with Comm100 LiveChat, you only need to do the followi
   - `POST /bot/chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)  
   and See [API Description](#api-description) for all interface definitions  
   and Click [Data Struct](#data-struct) to view key data structure definitions  
-### 2 Create a new Chatbot and fill in your adaptor service base URI
+### 2 Create a new Comm100 Chatbot and fill in your adaptor service base URI
 Create a new Chatbot in the comm100 System management background and configure it as follows   
 1 Fill in BOT name  
 2 Select "Third Party Engine" in the Engin input box   
