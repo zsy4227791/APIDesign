@@ -6,7 +6,7 @@
  ## System Structure Diagram
 ![1639547167(1)](https://user-images.githubusercontent.com/8872646/146130738-abcdba16-de82-482f-a8ac-295cbf83e2cf.png)
 ## Integrate Steps
-To integrate your Chatbot with comm100live chat, you only need to do the following two steps
+To integrate your Chatbot with Comm100 LiveChat, you only need to do the following two steps
 ### 1 Build Your Bot Adaptor Server
   As shown in the figure, establish your own Chatbot adapter service, which connects to your BOT Engine service and implements the interfaces in this API documents.
   You can first implement the following two important interfaces and start chatting
@@ -14,7 +14,7 @@ To integrate your Chatbot with comm100live chat, you only need to do the followi
   - `POST /bot/chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)
 ### 2 Create a new Chatbot and fill in your adaptor service base URI
 Create a new Chatbot in the comm100 System management background and configure it as follows,Fill in your adapter service base URI
-
+![1639547150](https://user-images.githubusercontent.com/8872646/146133472-9cf7cae0-fbf8-47c8-99b7-ad447fb29d86.png)
 
   
 
