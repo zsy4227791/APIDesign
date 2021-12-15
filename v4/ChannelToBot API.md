@@ -468,7 +468,7 @@ Text Response is represented as simple flat json objects with the following keys
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`transferTo` | Guid |  |   |
-  |`isForce` | bool |  | must transfer chat  |
+  |`isForce` | bool |  | Force transfer chat  |
   |`type` | string |  | type:`transferToAgent`,`transferToDepartment`,`transferRoutingRules`  |
 
 ### OutputForm Object
@@ -476,8 +476,8 @@ FormReplyResponse is represented as simple flat json objects with the following 
 
 |Name| Type| Default | Description     | 
 | - | - | :-: | - | 
-|`message` | string |   | A separate message which is sent before the button is sent.|
-|`title` | string |  | when a button is sent to visitor, clicking this button will open a form that contains information bot wants to collect from the visitor. the title refers to the title of that form, and it is also placed on the button as a name.|
+|`message` | string |   | A separate message which is sent before the form is sent.|
+|`title` | string |  | the title of that form|
 |`isConfirmationRequired` | bool |   | whether visitor needs to click confirm after filling out the information in a form.|
 |`fields` | [ChatbotActionSendFormField](#ChatbotActionSendFormField-object)[] | | an array of [ChatbotActionSendFormField](#ChatbotActionSendFormField-object)  |
 |`submitButtonText` | string |   | |
