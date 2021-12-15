@@ -479,7 +479,7 @@ FormReplyResponse is represented as simple flat json objects with the following 
 | - | - | :-: | - | 
 |`message` | string |   | A separate message which is sent before the form is sent.|
 |`title` | string |  | the title of that form|
-|`isConfirmationRequired` | bool |   | whether visitor needs to click confirm after filling out the information in a form.|
+|`isConfirmationRequired` | bool |   | whether visitor needs to click confirm before the form is submitted.|
 |`fields` | [ChatbotActionSendFormField](#ChatbotActionSendFormField-object)[] | | an array of [ChatbotActionSendFormField](#ChatbotActionSendFormField-object)  |
 |`submitButtonText` | string |   | |
 |`cancelButtonText` | string |   | |
@@ -493,12 +493,11 @@ Field is represented as simple flat json objects with the following keys:
 |Name| Type| Default | Description     | 
 | - | - | :-: | - | 
 |`type` | string | | enums: `text` ,`textArea`,`radio` ,`checkBox` ,`dropDownList` ,`checkBoxList`,`email` type refers to the different kinds of fields which can be used in a form. |
-|`name` | string |  | a field’s name in a form. |
-|`value` | string | | a field’s value |
-|`isRequired` | bool |  | to mark whether a field in a form is required or not. |
-|`isMasked` | bool |  | if this is true, visitor information will be masked with symbols in chat logs. |
+|`name` | string |  |Name of the form field. |
+|`value` | string | | Value of the field |
+|`isRequired` | bool |  | Whether the field is required or not |
 |`options` | string[] |  | an array of of string when the fieldType is `radio` ,`dropDownList` ,`checkBoxList`|
-|`order` | integer |  | must greater than or equal 0, ascending sort |
+|`order` | integer |  | Must be greater than or equal 0, ascending sort |
 |`variableName` | string |  |  |
 
 ### Option Object
