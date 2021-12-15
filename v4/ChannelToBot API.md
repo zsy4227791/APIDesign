@@ -6,21 +6,21 @@
  ## Bot Integration Structure Diagram
 ![image](https://user-images.githubusercontent.com/8872646/146148176-49759463-26a6-4991-862d-3cfb59b3d9e9.png)
 
-## Integrate Steps
+## Integration Steps
 To integrate your Chatbot with Comm100 Platform, you only need to do the following two steps:
-### 1 Building Your Bot Adaptor Service
-  As shown in the figure, You need establish your own Chatbot adaptor, which connects to your BOT Engine service and implements the interfaces in this API documents.
+### 1. Building Your Bot Adapter Service
+  As shown in the diagram, You need to establish your own Chatbot Adapter, which connects to your BOT Engine service and implements the interfaces in this API documents.
   You can first implement the following two important interfaces and start chatting
   - `POST /bot/chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
   - `POST /bot/chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)  
-  and See [API Description](#api-description) for all interface definitions  
-  and Click [Data Struct](#data-struct) to view key data structure definitions  
-### 2 Creating a new Comm100 Chatbot and fill in your adaptor service base URI
-Create a new Chatbot in the comm100 System management background and configure it as follows   
-1 Fill in BOT name  
-2 Select "Third Party Engine" in the Engin input box   
-3 Fill in your adapter root URI in the "webhook target URL" input box  
-4 Select the Comm100 Live Chat channel   
+  See [API Description](#api-description) for all interface definitions  
+  Click [Data Struct](#data-struct) to view key data structure definitions  
+### 2. Creating a new Comm100 Chatbot and fill in your adapter service base URI
+Create a new Chatbot in the Comm100 Control panel and configure it as follows   
+1. Fill in the Bot name  
+2. Select "Third Party Engine" as the bot Engine  
+3. Fill in your adapter root URI in the "Webhook target URL" input box  
+4. Select the Comm100 Live Chat channel   
 ![image](https://user-images.githubusercontent.com/8872646/146148035-2b0d215e-0064-45a2-bcd7-07cbd16356e5.png)
 
 
@@ -40,14 +40,13 @@ Create a new Chatbot in the comm100 System management background and configure i
 `POST /bot/chatbotSessions`
 
 #### Parameters
-Request body
-
-The request body contains data with the follow structure:
+Request Body
+The request body contains data with the following structure:
 
   | Name | Type | Required | Default | Description |    
   | - | - | :-: | :-: | - | 
-  | `chatbotId` | Guid | yes | |  the unique id of the bot |
-  | `channel` | string | yes | |  the channel of the bot |
+  | `chatbotId` | Guid | yes | |  The unique id of the bot |
+  | `channel` | string | yes | |  The channel of the bot |
   | `visitor`  |  [SessionVisitorInfo](#sessionvisitorinfo-object)  |no |   |  |
 
 example:
@@ -65,11 +64,11 @@ example:
 ```
 
 #### Response
-The Response body contains data with the follow structure:
+The Response body contains data with the following structure:
 
   | Name | Type |  Description |    
   | - | - | :-: | 
-  |`sessionId` | string | the unique id of the session |
+  |`sessionId` | string | The unique id of the session |
   |`content`  |  [GeneralResponse](#GeneralResponse-object)[]     |  |
 
 
@@ -131,7 +130,7 @@ Using curl
 ```
 curl -X DELETE https://domain.comm100.com/api/v4/bot/chatbotSessions/a9928d68-92e6-4487-a2e8-8234fc9d1f48
 ```
-Response
+Response Example
 ```Json
   HTTP/1.1 200 OK
 
@@ -458,7 +457,7 @@ Text Response is represented as simple flat json objects with the following keys
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`isForce` | bool |  | must input variable  |
+  |`isForce` | bool |  | Required Variables  |
   |`message` | string |  | string  |
   |`options` | [option](#option-object)[] |  |   |
   |`type` | string |  | type:`text`,`textarea`,`singleselect`,`checkbox`,`multiselect`,`email`,`password`,`date`，`time` ,`integer`,`decimal`|
