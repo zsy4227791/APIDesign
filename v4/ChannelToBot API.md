@@ -298,7 +298,7 @@ Response
       - [ChatbotInteraction](#chatbotinteraction) One ChatbotInteraction means one user input and one Chatbot output
         - [ChatbotInput](#chatbotinput-object) One User Input
         - [ChatbotOutput](#chatbotoutput-object) One Chatbot Output
-          - [ChatbotResponse](#chatbotresponse-object) one Chatbot output consists of multiple ChatbotResponse
+          - [ChatbotResponse](#chatbotresponse-object) One Chatbot output consists of multiple ChatbotResponse
 ### CreateChatbotSessionRequest Object
 
   |Name| Type | Default | Description | 
