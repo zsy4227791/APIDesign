@@ -3,15 +3,17 @@
   | 4.0 | v4 | Bot API | 2021-9-8 | Leon |  
  
  # Summary
- ## System Structure Diagram
+ ## Bot Integration Structure Diagram
 ![1639547167(1)](https://user-images.githubusercontent.com/8872646/146130738-abcdba16-de82-482f-a8ac-295cbf83e2cf.png)
 ## Integrate Steps
 To integrate your Chatbot with Comm100 LiveChat, you only need to do the following two steps
-### 1 Build Your Bot Adaptor Server
+### 1 Build Your Bot Adaptor Service
   As shown in the figure, establish your own Chatbot adapter service, which connects to your BOT Engine service and implements the interfaces in this API documents.
   You can first implement the following two important interfaces and start chatting
   - `POST /bot/chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
   - `POST /bot/chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)
+  and See [API Description](#api-description) for all interface definitions
+  and Click [Data Struct](#data-struct) to view key data structure definitions
 ### 2 Create a new Chatbot and fill in your adaptor service base URI
 Create a new Chatbot in the comm100 System management background and configure it as follows
 ![1639547150](https://user-images.githubusercontent.com/8872646/146133472-9cf7cae0-fbf8-47c8-99b7-ad447fb29d86.png)
@@ -20,7 +22,7 @@ Create a new Chatbot in the comm100 System management background and configure i
 3 Fill in your adapter root URI in the "webhook target URL" input box, followed by "/?v=2.0" 
 4 Select the Comm100 Live Chat channel 
 
-
+# API Description
 ## ChatbotSession
   - `POST /bot/chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
    - `DELETE /bot/chatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session)
