@@ -4,7 +4,8 @@
  
  # Summary
  ## Bot Integration Structure Diagram
-![image](https://user-images.githubusercontent.com/8872646/146148176-49759463-26a6-4991-862d-3cfb59b3d9e9.png)
+![image](https://user-images.githubusercontent.com/8872646/146502833-661bd26b-2e35-4e71-88af-fea3f1a4a6f7.png)
+
 
 ## Integration Steps
 To integrate your Chatbot with Comm100 Platform, you only need to do the following two steps:
