@@ -1,6 +1,6 @@
   | Change Version | API Version | Change nots | Change Date | Author |
   | - | - | - | - | - |
-  | 4.0 | v4 | Bot API | 2021-9-8 | Leon |  
+  |X2 4.0 | v4 | Bot API | 2021-9-8 | Leon |  
  
  # Summary
  ## Bot Integration Structure Diagram
@@ -469,9 +469,11 @@ Text Response is represented as simple flat json objects with the following keys
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`transferTo` | Guid |  |   |
+  |`transferTo` | Guid |  |agentid  when type is `transferToAgent` ,departmentid when type is `transferToDepartment`|
   |`isForce` | bool |  | Force transfer chat  |
   |`type` | string |  | type:`transferToAgent`,`transferToDepartment`,`transferRoutingRules`  |
+agentid can obtain from there
+![ac0859808d9d39f528d6863e9d46a2d](https://user-images.githubusercontent.com/8872646/152307132-9dd5918d-3a18-4fb6-b5b4-84d0f689d561.png)
 
 ### OutputForm Object
 FormReplyResponse is represented as simple flat json objects with the following keys:
