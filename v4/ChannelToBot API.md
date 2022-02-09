@@ -86,7 +86,8 @@ curl -H "Content-Type: application/json" -d '{
   }' -X POST https://domain.comm100.com/api/v4/bot/chatbotSessions
 ```
 .net code example
-![image](https://user-images.githubusercontent.com/8872646/146141066-c159e48a-6c29-476a-b380-1dd748ab6f64.png)
+![image](https://user-images.githubusercontent.com/8872646/153159849-198ff873-de2b-405c-b65b-aea100374a16.png)
+
 
 Response
 ```Json
