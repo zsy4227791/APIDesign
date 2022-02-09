@@ -12,8 +12,8 @@ To integrate your Chatbot with Comm100 Platform, you only need to do the followi
 ### 1. Building Your Bot Adapter Service
   As shown in the diagram, You need to establish your own Chatbot Adapter, which connects to your BOT Engine service and implements the interfaces in this API documents.
   You can first implement the following two important interfaces and start chatting
-  - `POST /bot/chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
-  - `POST /bot/chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)  
+  - `POST /chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
+  - `POST /chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)  
   See [API Description](#api-description) for all interface definitions  
   Click [Data Struct](#data-struct) to view key data structure definitions  
 ### 2. Creating a new Comm100 Chatbot and fill in your adapter service base URI
@@ -27,18 +27,18 @@ Create a new Chatbot in the Comm100 Control panel and configure it as follows
 
 # API Description
 ## ChatbotSession
-  - `POST /bot/chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
-   - `DELETE /bot/chatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session)
+  - `POST /chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
+   - `DELETE /chatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session)
 ## ChatbotInteraction  
-  - `POST /bot/chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)
+  - `POST /chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)
 ## ChatbotSessionVariable
-  - `GET /bot/chatbotSessions/{id}/variables` - [get the variables of the Chatbot Session ](#get-the-variables)
-  - `PUT /bot/chatbotSessions/{id}/variables` - [Update the variables of the Chatbot Session ](#update-the-variables)
+  - `GET /chatbotSessions/{id}/variables` - [get the variables of the Chatbot Session ](#get-the-variables)
+  - `PUT /chatbotSessions/{id}/variables` - [Update the variables of the Chatbot Session ](#update-the-variables)
 
 # Endpoints
 
 ### Create A New Chatbot Session
-`POST /bot/chatbotSessions`
+`POST /chatbotSessions`
 
 #### Parameters
 Request Body
@@ -113,7 +113,7 @@ Response
   }
 ```
 ### Delete The Chatbot Session
-`DELETE /bot/chatbotSessions/{ChatbotSessionId}`
+`DELETE /chatbotSessions/{ChatbotSessionId}`
 
 #### Parameters
 Path parameters
@@ -129,7 +129,7 @@ This method does not specify any sample responses.
 #### Example
 Using curl
 ```
-curl -X DELETE https://domain.comm100.com/api/v4/bot/chatbotSessions/a9928d68-92e6-4487-a2e8-8234fc9d1f48
+curl -X DELETE https://domain.comm100.com/api/v4/chatbotSessions/a9928d68-92e6-4487-a2e8-8234fc9d1f48
 ```
 Response Example
 ```Json
@@ -138,7 +138,7 @@ Response Example
 ```
 
 ### Create a Chatbot Interaction
-`POST /bot/chatbotSession/{chatbotSessionId}/interactions`
+`POST /chatbotSession/{chatbotSessionId}/interactions`
 
 #### Parameters
 
@@ -173,7 +173,7 @@ curl -H "Content-Type: application/json" -d '{
         "text":"i want to buy NBN"
       }
     }
-  }' -X POST https://domain.comm100.com/api/v4/bot/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/dialogs
+  }' -X POST https://domain.comm100.com/api/v4/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/dialogs
 ```
 Response
 ```Json
@@ -204,7 +204,7 @@ Response
   }
 ```
 ### Get The Variables
-`GET /bot/chatbotSession/{chatbotSessionId}/variables`
+`GET /chatbotSession/{chatbotSessionId}/variables`
 
 #### Parameters
 Path parameters
@@ -234,7 +234,7 @@ Request body
 #### Example
 Using curl
 ```
-curl -H "Content-Type: application/json"  -X GET https://domain.comm100.com/api/v4/bot/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/variables
+curl -H "Content-Type: application/json"  -X GET https://domain.comm100.com/api/v4/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/variables
 ```
 Response
 ```Json
@@ -249,7 +249,7 @@ Response
   }
 ```
 ### Update The Variables
-`PUT /bot/chatbotSession/{chatbotSessionId}/variables`
+`PUT /chatbotSession/{chatbotSessionId}/variables`
 
 #### Parameters
 Path parameters
@@ -287,7 +287,7 @@ curl -H "Content-Type: application/json" -d '  {
         "value":"leon"
       }
     ]
-  }' -X PUT https://domain.comm100.com/api/v4/bot/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/variables
+  }' -X PUT https://domain.comm100.com/api/v4/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/variables
 ```
 Response
 ```Json
