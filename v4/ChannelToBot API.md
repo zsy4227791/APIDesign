@@ -83,7 +83,7 @@ curl -H "Content-Type: application/json" -d '{
       "email":"kart@yahoo.com",
       "phone":"123-4355-212",
     }
-  }' -X POST https://domain.comm100.com/api/v4/bot/chatbotSessions
+  }' -X POST https://domain.comm100.com/api/v4/chatbotSessions
 ```
 .net code example
 ![image](https://user-images.githubusercontent.com/8872646/153159849-198ff873-de2b-405c-b65b-aea100374a16.png)
