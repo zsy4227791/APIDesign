@@ -471,7 +471,7 @@ Text Response is represented as simple flat json objects with the following keys
   | - | - | :-: | - | 
   |`transferTo` | Guid |  |agentid  when type is `transferToAgent` ,departmentid when type is `transferToDepartment`|
   |`type` | string |  | type:`transferToAgent`,`transferToDepartment`,`transferRoutingRules`  |
-  |`AgentOffLineMessage` | string |  | Message when agent is offline  |
+  |`messageWhenAgentOffline` | string |  | Message when agent is offline  |
   
 agentid can obtain from there
 
