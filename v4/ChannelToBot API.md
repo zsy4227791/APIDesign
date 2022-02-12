@@ -332,8 +332,8 @@ Response
 
   |Name| Type | Default | Description | 
   | - | - | :-: | - |   
-  | `type` | String  | | 	type of the response,including`text`,`audio`,`location`,`option`,`form`,`transferchat`|
-  | `content` | object  | | [InputText](#inputText-object), [InputLocation](#inputLocation-object), [InputOption](#inputOption-object)
+  | `type` | String  | | 	type of the response,including`text`,`location`,`option`,`form`|
+  | `content` | object  | | [InputText](#inputText-object), [InputLocation](#inputLocation-object), [InputOption](#inputOption-object),[InputForm](#inputform-object)
 
   ### InputText Object
   |Name| Type | Default | Description | 
@@ -380,7 +380,7 @@ Response
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
   |`type` | string | | type of the response,including `Text`,`QuickReply`、 `Image`、`Video`、`Authentication`,`Location`,`VariableData`,`Form`,`TransferChat`|
-  | `content` | object | |  response's content. when type is `Text`, it represents [OutputText](#outputtext-object); when type is `QuickReply`,it represents [OutputQuickReply](#outputquickreply-object);when type is `Image`,it represents [OutputImage](#outputimage-object);when type is `Video`,it represents [OutputVideo](#outputvideo-object); when type is `Authentication`, it represents [OutputAuthentication](#outputauthentication-object);when type is `Location`, it represents [OutputLocation](#outputLocation-object);when type is `VariableData`, it represents [OutputVariableData](#outputvariabledata-object);when type is `Form`, it represents [OutputForm](#form-object);when type is `TransferChat`, it represents [OutputTransferChat](#transferchat-object);|
+  | `content` | object | |  response's content. when type is `Text`, it represents [OutputText](#outputtext-object); when type is `QuickReply`,it represents [OutputQuickReply](#outputquickreply-object);when type is `Image`,it represents [OutputImage](#outputimage-object);when type is `Video`,it represents [OutputVideo](#outputvideo-object); when type is `Location`, it represents [OutputLocation](#outputLocation-object);when type is `Form`, it represents [OutputForm](#form-object);when type is `TransferChat`, it represents [OutputTransferChat](#transferchat-object);|
   |`delayTime` | decimal | 1 | how many seconds delay to show  |
 
 ### OutputText Object
@@ -424,15 +424,6 @@ Text Response is represented as simple flat json objects with the following keys
   | - | - | :-: | - | 
   |`videoUrl` | string |  | string  |
   |`message` | string |  | string  |
-### OutputAuthentication Object
-Text Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`isForce` | bool |  | must login and can not input  text  |
-  |`loginButtonText` | string |  | string  |
-  |`loginUrl` | string |  | string  |
-  |`message` | string |  | string  |
 
  ### OutputLocation Object
 Text Response is represented as simple flat json objects with the following keys:
@@ -443,17 +434,6 @@ Text Response is represented as simple flat json objects with the following keys
   |`isForce` | bool |  | must location and can not input  text  |
   |`message` | string |  | string  |
 
-
-  ### OutputVariableData Object
-Text Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`isForce` | bool |  | Required Variables  |
-  |`message` | string |  | string  |
-  |`options` | [option](#option-object)[] |  |   |
-  |`type` | string |  | type:`text`,`textarea`,`singleselect`,`checkbox`,`multiselect`,`email`,`password`,`date`，`time` ,`integer`,`decimal`|
-  |`variableName` | string |  | string  |
   ### OutputTransferChat Object
 Text Response is represented as simple flat json objects with the following keys:
 
@@ -466,6 +446,10 @@ Text Response is represented as simple flat json objects with the following keys
 agentid can obtain from there
 
 ![ac0859808d9d39f528d6863e9d46a2d](https://user-images.githubusercontent.com/8872646/152307132-9dd5918d-3a18-4fb6-b5b4-84d0f689d561.png)
+
+departmentid can obtain from there
+
+![image](https://user-images.githubusercontent.com/8872646/153702520-2b9ebd22-1eb8-4143-8e84-4b0cd1e86ae4.png)
 
 ### OutputForm Object
 FormReplyResponse is represented as simple flat json objects with the following keys:
