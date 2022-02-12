@@ -333,23 +333,17 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - |   
   | `type` | String  | | 	type of the response,including`text`,`audio`,`location`,`option`,`form`,`transferchat`|
-  | `content` | object  | | [InputText](#inputText-object), [InputAudio](#inputAudio-object), [InputLocation](#inputLocation-object), [InputOption](#inputOption-object), [InputForm](#inputForm-object) , [InputTransferChat](#inputTransferChat-object)|
+  | `content` | object  | | [InputText](#inputText-object), [InputLocation](#inputLocation-object), [InputOption](#inputOption-object)
 
   ### InputText Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `text` | String  | |  |
-  ### InputAudio Object
-  |Name| Type | Default | Description | 
-  | - | - | :-: | - | 
-  | `text` | String  | |  |
-  | `audio` | String  | |  |
   ### InputLocation Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
   | `location` | String  | | the longitude and latitude of the location, e.g. "-39.900000,116.300000" |
   | `action` | string  | | submit, cancel |
-
   ### InputOption Object
   |Name| Type | Default | Description | 
   | - | - | :-: | - | 
@@ -358,11 +352,6 @@ Response
   |Name| Type | Default | Description | 
   | - | - | :-: | - |
   | `formValues` | [FieldValue](#FieldValue-object)[]  | |  an array of [FieldValue](#FieldValue-object) |
-  | `formId` | Guid  | |  |
-  | `action` | string  | | submit, cancel |
-  ### InputTransferChat Object
-  |Name| Type | Default | Description | 
-  | - | - | :-: | - | 
   | `action` | string  | | submit, cancel |
   
 ### FieldValue Object
