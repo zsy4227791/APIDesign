@@ -111,7 +111,8 @@ Response
                     }
                 ],
                 "message": "Hi there! I'm a chatbot, here to help answer your questions."
-            }
+            },
+            "delaytime":1
         }
     ]
 }
