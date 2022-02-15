@@ -28,12 +28,12 @@ Create a new Chatbot in the Comm100 Control panel and configure it as follows
 # API Description
 ## ChatbotSession
   - `POST /chatbotSessions` - [Create a new Chatbot Session](#create-a-new-chatbot-session)
-   - `DELETE /chatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session)
+<!--    - `DELETE /chatbotSessions/{id}` - [Delete the Chatbot Session](#delete-the-chatbot-session) -->
 ## ChatbotInteraction  
   - `POST /chatbotSessions/{id}/interactions` - [Send a  Chatbot Input and get a Chatbot Output](#create-a-chatbot-interaction)
-## ChatbotSessionVariable
-  - `GET /chatbotSessions/{id}/variables` - [get the variables of the Chatbot Session ](#get-the-variables)
-  - `PUT /chatbotSessions/{id}/variables` - [Update the variables of the Chatbot Session ](#update-the-variables)
+<!-- ## ChatbotSessionVariable -->
+<!--   - `GET /chatbotSessions/{id}/variables` - [get the variables of the Chatbot Session ](#get-the-variables) -->
+<!--   - `PUT /chatbotSessions/{id}/variables` - [Update the variables of the Chatbot Session ](#update-the-variables) -->
 
 # Endpoints
 
@@ -177,7 +177,7 @@ curl -H "Content-Type: application/json" -d '{
         "text":"i want to buy NBN"
       }
     }
-  }' -X POST https://domain.comm100.com/api/v4/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/dialogs
+  }' -X POST https://domain.comm100.com/api/v4/chatbotSessions/f9928d68-92e6-4487-a2e8-8234fc9d1f48/interactions
 ```
 Response
 ```Json
@@ -207,6 +207,8 @@ Response
     }   
   }
 ```
+<!--
+ 
 ### Get The Variables
 `GET /chatbotSession/{chatbotSessionId}/variables`
 
@@ -297,7 +299,7 @@ Response
 ```Json
   HTTP/1.1 200 OK
 ```
-
+ -->
 # Data Struct
 
    - [ChatbotSession](#chatbotsession)    A ChatbotSession means a Session between the user and the chatbot
