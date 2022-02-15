@@ -94,24 +94,27 @@ Response
   HTTP/1.1 200 OK
   Content-Type:  application/json
 
-  {    
+{
     "sessionId": "f9928d68-92e6-4487-a2e8-8234fc9d1f48",
-    "content":[{
-              "type":"text",
-              "content":{
-                    "links": [{
-                      "buttonText":"ok",
-                      "url":"http://baidu.com",
-                      "type":"intent",
-                      "openStyle":"tail",
-                      "openIn":"sideWindow",
-                      "order":1,
-                    }],
-                    "message": "Hi there! I'm a chatbot, here to help answer your questions.",                        
-              },
-              "delayTime": 1   
-    }]
-  }
+    "content": [
+        {
+            "type": "text",
+            "content": {
+                "links": [
+                    {
+                        "buttonText": "ok",
+                        "url": "http://baidu.com",
+                        "type": "intent",
+                        "openStyle": "tail",
+                        "openIn": "sideWindow",
+                        "order": 1
+                    }
+                ],
+                "message": "Hi there! I'm a chatbot, here to help answer your questions."
+            }
+        }
+    ]
+}
 ```
 ### Delete The Chatbot Session
 `DELETE /chatbotSessions/{ChatbotSessionId}`
