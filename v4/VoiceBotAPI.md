@@ -174,89 +174,107 @@ Response
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`type` | string | | type of the response,including `Message`,`QuickReply`、 `Image`、`Video`、`Authentication`,`Location`,`VariableData`,`Form`,`TransferChat`|
-  | `content` | object | |  response's content. when type is `Message`, it represents [Message](#message-object); when type is `QuickReply`,it represents [QuickReply](#quickreply-object);when type is `Image`,it represents [Image](#image-object);when type is `Video`,it represents [Video](#video-object); when type is `Authentication`, it represents [Authentication](#authentication-object);when type is `Location`, it represents [Location](#collectlocation-object);when type is `VariableData`, it represents [VariableData](#variabledata-object);when type is `Form`, it represents [Form](#form-object);when type is `TransferChat`, it represents [TransferChat](#transferchat-object);|
+  |`type` | string | | type of the response,including `PlayAudio`,`PlayText`,`ClearValue`,`CollectDTMFDigits`,`CollectSpeechResponse`,`Condition`,`EndCall`,`GoToIntent`,`IVRMenu`,`SetVariableValue`,`TransferChat`,`Webhook`|
+  | `content` | object | |  response's content. when type is `PlayAudio`, it represents [PlayAudio](#PlayAudio-object); when type is `PlayText`,it represents [PlayText](#PlayText-object);when type is `ClearValue`,it represents [ClearValue](#ClearValue-object);when type is `CollectDTMFDigits`,it represents [CollectDTMFDigits](#CollectDTMFDigits-object); when type is `CollectSpeechResponse`, it represents [CollectSpeechResponse](#CollectSpeechResponse-object);when type is `Condition`, it represents [Condition](#Condition-object);when type is `EndCall`, it represents [EndCall](#EndCall-object);when type is `GoToIntent`, it represents [GoToIntent](#GoToIntent-object);when type is `IVRMenu`, it represents [IVRMenu](#IVRMenu-object);when type is `SetVariableValue`, it represents [SetVariableValue](#SetVariableValue-object);when type is `TransferChat`, it represents [TransferChat](#TransferChat-object);when type is `Webhook`, it represents [Webhook](#Webhook-object);|
   |`delayTime` | decimal | 1 | how many seconds delay to show  |
 
-#### Message Object
+#### PlayAudio Object
   Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`message` | string |  | string  |
-  |`VoiceBotActionSendMessageLinks` | [button](#button-object) object []|  |   |
- #### Button Object
-Text Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`buttonText` | String |  |   |
-  |`url` | String |  |   |
-  |`type` | String |  | webPage,webview|
-  |`openStyle` | String |  | full,tall,compact  |
-  |`openIn` | String |  | newWindow, sideWindow,currentWindow|
-  |`order` | int |  |   |
- #### QuickReply Object
-Text Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`isForce` | bool |  | must select and can not input  text  |
-  |`message` | string |  | string  |
-  |`options` | [option](#option-object) |  |   |
-   #### Option Object
-Text Response is represented as simple flat json objects with the following keys:
-
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`optionId` | Guid |  |   |
-  |`order` | int |  |   |
-  |`text` | String |  |   |
-  |`type` | String | text |   |
-#### Image Object
+  |`VoicebotActionId` | Guid |  | Id of the Action.  |
+  |`AudioPath` | String|  | String  |
+  |`NextActionId` | Guid|  | Id of the  Next Action. |
+ #### PlayText Object
   Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`imageUrl` | string |  | string  |
-  |`message` | string |  | string  |
-#### Video Object
+  |`VoicebotActionId` | Guid |  | Id of the Action.  |
+  |`Message` | String|  | String  |
+  |`NextActionId` | Guid|  | Id of the  Next Action. |
+ #### ClearValue Object
+Text Response is represented as simple flat json objects with the following keys:
+
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`VoicebotActionId` | Guid |  | Id of the Action.  |
+  |`VariableId` | Guid|  | Id of the VariableId  |
+  |`NextActionId` | Guid|  | Id of the  Next Action. |
+ #### CollectDTMFDigits Object
+Text Response is represented as simple flat json objects with the following keys:
+
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`VoicebotActionId` | Guid |  | Id of the Action.  |
+  |`Message` | String|  | String  |
+  |`VariableName` | String|  | String  |
+  |`NumberOfDigits` | Int|  | DTMF Digits  |
+  |`StopGatherAfterPresskey` | int|  | int  |
+  |`NextActionId` | Guid|  | Id of the  Next Action. |
+#### CollectSpeechResponse Object
   Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`videoUrl` | string |  | string  |
-  |`message` | string |  | string  |
-#### Authentication Object
+  |`VoicebotActionId` | Guid |  | Id of the Action.  |
+  |`Message` | String|  | String  |
+  |`VariableName` | String|  | String  |
+  |`LowSTTConfidenceMessage` | String|  | String  |
+  |`LowSTTConfidenceRepeatTimes` | Int|  | Int  |
+  |`IsConfirmationRequired` | Bool|  | int  |
+  |`ConfirmationMessage` | String|  | String  |
+  |`ConfirmationText` | String|  | String  |
+  |`ConfirmationKey` | int|  | int  |
+  |`ActionIdWhenLowSTTConfidence` | Guid|  | int  |
+  |`NextActionId` | Guid|  | Id of the  Next Action. |
+#### Condition Object
+  Text Response is represented as simple flat json objects with the following keys:
+
+  |Name| Type| Default | Description     | 
+  | - | - | :-: | - | 
+  |`VoicebotActionId` | Guid |  | Id of the Action.  |
+  |`OtherCaseActionId` | Guid |  | Id of the other case Action.  |
+  |`VoicebotActionConditionCase` | [VoicebotActionConditionCase[]](#VoicebotActionConditionCase-object) |  |   |
+#### VoicebotActionConditionCase Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`isForce` | bool |  | must login and can not input  text  |
-  |`loginButtonText` | string |  | string  |
-  |`loginUrl` | string |  | string  |
-  |`message` | string |  | string  |
+  |`VoicebotActionId` | Guid |  | Id of the Action.  |
+  |`Order` | Int |  | Int  |
+  |`ConditionExpressionType` | Type |  | Allowed values are "all", "any", "logicalExpression".  |
+  |`LogicalExpression` | string |  | string  |
+  |`GoToActionId` | Guid |  | Id of the Action.  |
+  |`Id` | Guid |  | Id of the Condition Case.  |
+  |`VoicebotActionConditionCaseConditions` | [VoicebotActionConditionCaseConditions[]](#VoicebotActionConditionCaseConditions-object) |  |   |
 
- #### CollectLocation Object
+ #### VoicebotActionConditionCaseConditions Object
 Text Response is represented as simple flat json objects with the following keys:
 
   |Name| Type| Default | Description     | 
   | - | - | :-: | - | 
-  |`buttonText` | string |  | string  |
-  |`isForce` | bool |  | must location and can not input  text  |
-  |`message` | string |  | string  |
+  |`VoicebotActionConditionCaseId` | Guid |  | Id of the Condition Case.  |
+  |`FieldName` | [FieldName](#FieldName-object) |  |   |
+  |`operator` | Type |  | Allowed values are "is", "contains", "notContains", "isMoreThan", "isLessThan", "isNot", "isNotLessThan", "isNotMoreThan", "regularExpression", "isOneOf", "isNotIn", "dateNotEqualTo", "before", "after", "dateEqualTo".  |
+  |`Value` | string |  | string  |
+  |`Order` | Int |  | Int  |
+  |`Id` | Guid |  | Guid  |
+  |`Items` | List |  | List  |
 
 
-  #### CollectVariableData Object
+  #### FieldName Object
 Text Response is represented as simple flat json objects with the following keys:
 
-  |Name| Type| Default | Description     | 
-  | - | - | :-: | - | 
-  |`isForce` | bool |  | must input variable  |
-  |`message` | string |  | string  |
-  |`options` | array |  |   |
-  |`type` | string |  | type:`integer`,`singleselect`,`multiselect`,`text`,`textarea`，`decimal`，`email`，`password`，`date`，`time` |
-  |`variableName` | string |  | string  |
+  |Name| Operator|
+  | - | - |
+  |`{!Visitor.Country/Region}` | is/isNot/contains/notContains/regularExpression |
+  |`{!Visitor.State/Province}` | is/isNot/contains/notContains/regularExpression |
+  |`{!Visitor.City}` | is/isNot/contains/notContains/regularExpression |
+  |`{!Visitor.Time Zone}` | isOneOf/isNotIn |
+  |`{!Visitor.Language}` | is/isNot/contains/notContains/regularExpression |
+  |`{!Visitor.CardId}` | is/isNot/contains/notContains/regularExpression |
   #### TransferChat Object
 Text Response is represented as simple flat json objects with the following keys:
 
@@ -308,3 +326,5 @@ Field is represented as simple flat json objects with the following keys:
 |`currentPageURL` | string |  |  |
 |`searchEngine` | string |  |  |
 |`searchKeywords` | string |  |  |
+
+
